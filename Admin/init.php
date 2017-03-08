@@ -9,4 +9,10 @@
  //Important Files arrangemnt is important
     include $fun . "function.php";
     include $tpl . "header.php";
+//Languages
+    include $lan . "english.php";    
+    if(!isset($nonavbar))
+    {
+        include $tpl . "navbar.php";
+    }  
 ?>
