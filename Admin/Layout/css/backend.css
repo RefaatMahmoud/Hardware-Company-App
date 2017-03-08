@@ -1,1 +1,223 @@
+/*Start Login Form*/
+body
+{
+    background-color: #EAEAEA;
+    font-size: 16px;
+}
+.login
+{
+    margin: 200px auto;
+    width: 330px;
+}
+.input-lg
+{
+    margin-bottom: 10px;
+}
+.text-center
+{
+    color: #503a3a;
+}
+fieldset
+{
+    background:#EFEFEF;
+    padding:10px;
+    border:3px solid #CCC;
+    margin-bottom:20px;
+			
+}
+legend
+{
+    background:#FFF;
+    width: 70px;
+    border:3px solid #CCC;
+    padding-left: 2px;
+    font-weight: bold;
+}
+legend span
+{
+    color:#06cd39;
+}
+/*End Login Form*/
+/*Start Navbar*/
+.navbar
+{
+    border-radius:0;
+}
+.dropdown-menu
+{
+    min-width: 190px;
+    background-color: #00b2ff;
+    border: 0px;
+}
+.navbar-inverse .navbar-nav>.open>a, 
+.navbar-inverse .navbar-nav>.open>a:focus, 
+.navbar-inverse .navbar-nav>.open>a:hover
+{
+    background-color: #00b2ff;
+}
+.dropdown-menu>li>a
+{
+   background-color: #00b2ff;
+    color: #FFF;
+    padding: 10px;
+    font-size: 15px;
+}
+/*End Navbar*/
+/*Start in Edit members*/
+.form-group
+{
+margin-bottom : 20px;
+font-size: 18px;
+}
+#myBtn
+{
+    margin-left: 100px;
+    font-size: 18px;
+}
+/*Start-Asterix && eye*/
+.form-control
+{
+    position: relative;
+}
+.asterix
+{
+    position: absolute;
+    right:20px;
+    top:2px;
+    font-size: 25px;
+    color: red;
+}
+.show-pass
+{
+    position: absolute;
+    right:-15px;
+    top:2px;
+    font-size: 25px;
+}
+/*End-Asterix && eye*/
+/*End Edit Members*/
+/*Strart in Manage members tables*/
+.main-table th
+{
+    text-align: center;
+    color: #FFF;
+    background-color: #444;
+    font-size: 25px;
+}
+.main-table td
+{
+    text-align: center;
+    color: black;
+    background-color: #FFF;
+    font-size: 20px;
+}
+.EditBtn
+{
+    margin-right: 10px;
+}
+.ActiveBtn
+{
+    margin-left: 10px;
+}
+.AddBtn
+{
+    font-size: 20px;
+}
+/*End in manger members tables*/
+/*Start Dashboard*/
+.home-stat .stat
+{
+    background-color: #FFF;
+    font-size: 20px;
+    padding:20px 0px 20px 70px;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
 
+.home-stat .stat i
+{
+    position: absolute;
+    font-size: 80px;
+    margin-left: -50px;
+}
+.home-stat .stat .info
+{
+    float: right;
+    margin-right: 10px;
+}
+
+.home-stat .stat span
+{
+    font-size: 50px;
+    display: block;
+    padding:0px 0px 0px 20px;
+}
+.home-stat .stat a
+{
+    color: #FFF;
+    text-decoration: none;
+}
+.home-stat h1
+{
+    text-align: center;
+    padding-bottom: 20px;
+    color: #666;
+    font-size: 60px;
+    font-weight: bold;
+}
+.latest
+{
+    margin-top: 10px;
+}
+.home-stat .st-members
+{
+    background-color: #3498bd;
+    color: #FFF;
+}
+.home-stat .st-pending
+{
+    background-color: #8e44ad;
+    color: #FFF;
+}
+.home-stat .st-items
+{
+    background-color: #d35400;
+    color: #FFF;
+}
+.home-stat .st-comments
+{
+    background-color: #22eaaa;
+    color: #FFF;
+}
+/*Start in leatest 5 */
+.even
+{
+    background-color: #FFF;
+    height: 40px;
+    position: relative;
+    font-weight: bold;
+    text-align:left;
+    padding-top: 8px;
+}
+.odd
+{
+    background-color: #EAEAEA;
+    position: relative;
+    height: 40px;
+    font-weight: bold;
+    text-align:left;
+    padding-top: 8px;
+}
+.even .EditBtn,
+.odd .EditBtn
+{
+    margin-top: -5px;
+    position: absolute;
+    right: -9px;
+}
+
+/*End in leatest 5*/
+
+/*End Dashboard*/
+/*End in Manage members*/
