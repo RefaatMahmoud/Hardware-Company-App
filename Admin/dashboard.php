@@ -19,7 +19,7 @@ may appear error in header
                         <i class="fa fa-user-circle"></i>
                         <div class="info">
                             Total Members
-                        <span><a href="members.php"><?php echo CountItems('UserID','adminusers')?></a></span>
+                        <span><a href="members.php"><?php echo CountItems('UserID','adminusers') +1?></a></span>
                         </div>
                     </div>
                 </div>
@@ -28,7 +28,7 @@ may appear error in header
                         <i class="fa fa-group"></i>
                         <div class="info">
                         Pend Members
-                        <span>0</span>
+                            <span>0</span>
                         </div>
                     </div>
                 </div>
@@ -37,7 +37,7 @@ may appear error in header
                         <i class="fa fa-cubes"></i>
                         <div class="info">
                              Total Items
-                        <span>0</span>
+                        <span><a href="Items.php">0</a></span>
                         </div>
                     </div>
                 </div>
@@ -78,15 +78,13 @@ may appear error in header
                                      Edit</a>";
                                     echo "</div>";
                                 }
-                                else
-                                {
+                                else {
                                     echo "<div class='odd'>";
-                                    echo $val['Username'] ;  
-                                     echo "<a href='members.php?do=edit&userid=".$val['UserID']."'class='EditBtn btn btn-success'><i class ='fa fa-edit'></i>
+                                    echo $val['Username'];
+                                    echo "<a href='members.php?do=edit&userid=" . $val['UserID'] . "'class='EditBtn btn btn-success'><i class ='fa fa-edit'></i>
                                     Edit</a>";
                                     echo "</div>";
                                 }
-                                 
                             }
                             
                             ?>

@@ -1,10 +1,10 @@
 <?php
     include "connect.php";
  //Routes
-    $tpl = "Includes/Templetes/";
-    $lan = "Includes/Languages/";
-    $fun = "Includes/Function/";
-    $css = "Layout/CSS/";
+    $tpl = "Include/Templetes/";
+    $lan = "Include/Languages/";
+    $fun = "Include/Function/";
+    $css = "Layout/css/";
     $js =  "Layout/JS/";
  //Important Files arrangemnt is important
     include $fun . "function.php";
@@ -14,5 +14,5 @@
     if(!isset($nonavbar))
     {
         include $tpl . "navbar.php";
-    }  
+    }
 ?>

@@ -8,6 +8,7 @@ ob_start();
 session_start(); //Resume Session
     if(isset($_SESSION['username']))
     {
+        $title = 'members';
         include "init.php";
         //check value that coming from URL
         $do = isset($_GET['do']) ? $_GET['do'] : 'manage';
@@ -39,7 +40,7 @@ session_start(); //Resume Session
                     foreach($rows as $row)
                     {
                         echo "<tr>";
-                        echo "<td>" .$row['UserID']."</td>";
+                        echo "<td>" .$row['UserID']."</td>"; //$row[0]
                         echo "<td>" .$row['Username']."</td>";
                         echo "<td>" .$row['Email']."</td>";
                         echo "<td>" .$row['FullName']."</td>";
@@ -240,7 +241,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
            else
             {
                 echo "<div class='container'>";
-                echo "<div class='alert alert-warning text-center'>" .'<h3>You Not Change It</h3</div>';
+                echo "<div class='alert alert-warning text-center'>" .'<h3>You Not Change It</h3></div>';
                 echo "</div>";
             }   
     }    
@@ -260,7 +261,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
 if($_SERVER['REQUEST_METHOD'] == "POST")
     {
     //collect Data By Post
-    echo "<h2 class='text-center'>Insert Member</h2>";
     $user = $_POST['username'];
     $email = $_POST['email'];
     $fullname = $_POST['fullname'];
@@ -272,35 +272,31 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     echo "<div class='container'>";
     if(is_numeric($user))
     {
-        $formError[] = "username can't be a start with number";
+        $formError[0] = "username can't be a start with number";
     }
     if(is_numeric($fullname))
     {
-        $formError[] = "Fullname can't be a start with number";
+        $formError[1] = "Fullname can't be a start with number";
     }
     if(empty($user))
     {
-        $formError[] = "You can't make username is <strong> Empty </strong>";
+        $formError[2] = "You can't make username is <strong> Empty </strong>";
     }
     if(empty($email))
     {
-        $formError[] = "You can't make email is <strong> Empty </strong>";
+        $formError[3] = "You can't make email is <strong> Empty </strong>";
     }
     if(empty($fullname))
     {
-        $formError[] = "You can't make fullname is <strong> Empty </strong>";
+        $formError[4] = "You can't make fullname is <strong> Empty </strong>";
     }
     if(empty($pass))
     {
-        $formError[] = "You can't make password is <strong> Empty </strong>";
+        $formError[5] = "You can't make password is <strong> Empty </strong>";
     }
     if(strlen($pass) < 6 )
     {
-        $formError[] = "Your password is week";
-    }
-    foreach($formError as $error)
-    {
-        echo "<div class='alert alert-danger'>" . $error . " </div>";
+        $formError[6] = "Your password is week";
     }
     echo "</div>";
     //Get Data By prepare statment
@@ -326,7 +322,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
      {
        $stmt = $con->prepare("Insert into adminusers (Username,Email,FullName,
                           Password ,Date) values(:zuser , :zemail , :zfullname ,:zhash,now())");  
-    
     //excute Data
     $stmt->execute(array(
         'zuser' => $user ,
@@ -346,10 +341,74 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     }
            else
             {
-                echo "<div class='container'>";
-                echo "<div class='alert alert-warning text-center'>" .'<h3>You Not Insert any thing</h3</div>';
-                echo "</div>";
-               header("REFRESH:5 ; URL=members.php?do=add");
+               /*
+               ==========================================
+               ===============Error Validations =========
+               ==========================================
+               */
+?>
+<div class="container">
+  <h1 class="text-center">Add New Member</h1>
+  <form class="form-horizontal" role="form" action="?do=insert" method="POST">
+    <div class="form-group">
+        <input type="hidden" name="userid">
+      <label class="control-label col-sm-2 col-md-3">UserName:</label>
+      <div class="col-sm-10 col-md-6 has-error">
+        <input type="text" class="form-control" name="username"
+               placeholder=" write not start with number username" autocomplete="off" required="required">
+    <?php
+    if(isset($formError[0])) 
+        echo "<div class='error_valid alert alert-danger'>".$formError[0]."</div>"; 
+    if(isset($formError[3]))
+    {
+        echo "<div class='error_valid alert alert-danger'>".$formError[2]."</div>"; 
+    }   
+    ?> 
+    </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2 col-md-3" for="pwd">Password:</label>
+      <div class="col-sm-10 col-md-6 has-error">
+        <input type="password" class="password form-control" name="password" placeholder="write strong password here" autocomplete="new-password" required="required">
+        <i class="show-pass fa fa-eye fa-2x"></i>
+    <?php
+    if(isset($formError[5])) 
+        echo "<div class='error_valid alert alert-danger'>".$formError[5]."</div>";
+    if(isset($formError[6])) 
+        echo "<div class='error_valid alert alert-danger'>".$formError[6]."</div>"; 
+    ?>
+      </div>
+    </div>
+      <div class="form-group">
+      <label class="control-label col-sm-2 col-md-3" for="email">Email:</label>
+      <div class="col-sm-10 col-md-6">
+        <input type="email" class="form-control" name="email" placeholder="Your email" required="required">
+      </div>
+    </div>
+      <div class="form-group">
+      <label class="control-label col-sm-2 col-md-3" for="pwd">FullName:</label>
+      <div class="col-sm-10 col-md-6 has-error">
+        <input type="text" class="form-control" name="fullname" placeholder="write your fullname" required="required">
+    
+    <?php
+        if(isset($formError[1])) 
+        echo "<div class='error_valid alert alert-danger'>".$formError[1]."</div>";
+    ?>
+    
+      </div>
+      </div>
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10 col-md-8">
+        <button type="submit" class="btn btn-primary" id="myBtn">save</button>
+      </div>
+    </div>
+  </form>
+</div>   
+                <?php
+//                foreach($formError as $error)
+//                {
+//                echo "<div class='alert alert-danger'>" . $error . " </div>";
+//                }
             }   
     }
       else
@@ -382,7 +441,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
         $stmt->bindParam('zuser',$userid);
         $stmt->execute();  
         echo "<div class='container'>";
-        echo "<div class='alert alert-success text-center'>" .'<h3>1 Record Deleted </h3>  </div>';
+        echo "<div class='alert alert-success text-center'>" .'<h2>1 Record Deleted </h2>  </div>';
+        echo "<div class='alert alert-info text-center'><h3>You will Redirect to members page After 5 seconds</h3> </div>";
+        header('REFRESH:5 ; URL=members.php');
         echo "</div>";
         }
     else
