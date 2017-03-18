@@ -4,7 +4,7 @@
     $tpl = "Include/Templetes/";
     $lan = "Include/Languages/";
     $fun = "Include/Function/";
-    $css = "Layout/CSS/";
+    $css = "Layout/css/";
     $js =  "Layout/JS/";
  //Important Files arrangemnt is important
     include $fun . "function.php";
