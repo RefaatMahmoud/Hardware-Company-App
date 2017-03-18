@@ -218,6 +218,18 @@ font-size: 18px;
 }
 
 /*End in leatest 5*/
-
 /*End Dashboard*/
 /*End in Manage members*/
+
+/*Strart validation in Insert */
+.error_valid
+{
+    width: 350px;
+    float: left;
+    margin-left: 0px;
+    margin-top: 10px;
+    height: 30px;
+    margin-bottom: -10px;
+    padding:0px 0px 0px 5px;
+}
+/*End validation in in insert*/
