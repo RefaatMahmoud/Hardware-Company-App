@@ -6,6 +6,7 @@
 */
 
 
+<<<<<<< HEAD
     ob_start();
     session_start(); //Resume Session
 
@@ -70,9 +71,12 @@
                     ?>
                 </table>
             </div>
+<<<<<<< HEAD
                       <a href='items.php?do=add' class="btn btn-primary"><li class="AddBtn fa fa-user-plus">Add a new Item</li></a>     
         </div> 
          <?php
+
+
         }
         /*
         ================================================
@@ -83,6 +87,7 @@
     {
       ?>    
 
+<<<<<<< HEAD
 <div class="container">
   <h1 class="text-center">Add New Item</h1>
   <form class="form-horizontal" role="form" action="?do=insert" method="POST">
@@ -98,10 +103,13 @@
       <label class="control-label col-sm-2 col-md-3" for="description">Description:</label>
       <div class="col-sm-10 col-md-6">
         <input type="text" class="password form-control" name="description" placeholder="write description" autocomplete="new-password" required="required">
+=======
+
         <i class="show-pass fa fa-eye fa-2x"></i>
       </div>
     </div>
       <div class="form-group">
+<<<<<<< HEAD
       <label class="control-label col-sm-2 col-md-3" for="price">Price:</label>
       <div class="col-sm-10 col-md-6">
         <input type="text" class="form-control" name="price" placeholder="enter price" required="required">
@@ -136,6 +144,7 @@
       <label class="control-label col-sm-2 col-md-3" for="memberid">Member_ID:</label>
       <div class="col-sm-10 col-md-6">          
         <input type="text" class="form-control" name="memberid" placeholder="member_id as forign key" required="required">
+
       </div>
       </div>
     <div class="form-group">        
@@ -145,6 +154,7 @@
     </div>
   </form>
 </div>   
+<<<<<<< HEAD
 
 <?php
 }
@@ -321,6 +331,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     }
         /*
             ===============================================================
+<<<<<<< HEAD
             ============== Insert code From $do=insert =======================
             ===============================================================
         */
@@ -430,6 +441,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
               echo "</div>";
                   header("REFRESH:3 ; URL=items.php?do=add");   
             }
+
+
            else
             {
                /*
@@ -438,9 +451,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
                ==========================================
                */
 ?>
+<<<<<<< HEAD
 
 <!--<div class="container">
   <h1 class="text-center">Add New Item</h1>
+=======
   <form class="form-horizontal" role="form" action="?do=insert" method="POST">
     <div class="form-group">
         <input type="hidden" name="userid">
@@ -495,7 +510,10 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
       </div>
     </div>
   </form>
+<<<<<<< HEAD
 </div>-->   
+=======
+</div>
                 <?php
 //                foreach($formError as $error)
 //                {
@@ -514,6 +532,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
             ====================== Delete code ============================
             ===============================================================
         */
+<<<<<<< HEAD
     else if($do='delete')
     {
             
@@ -531,26 +550,33 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
         
         
         //if userid in my DB will appear my form    
+=======
+
     if($count>0)
     {
         //this binding method to prevent Sql Injunction
         $stmt = $con->prepare('DELETE FROM adminusers WHERE UserID = :zuser');
+<<<<<<< HEAD
         
         //binding method
         $stmt->bindParam('zuser',$userid);
         $stmt->execute();  
         
+
         echo "<div class='container'>";
         echo "<div class='alert alert-success text-center'>" .'<h2>1 Record Deleted </h2>  </div>';
         echo "<div class='alert alert-info text-center'><h3>You will Redirect to members page After 5 seconds</h3> </div>";
         header('REFRESH:5 ; URL=members.php');
         echo "</div>";
+<<<<<<< HEAD
     }
+
     else
     {
         $x = "This account is not Exit";
         RedirectFunc($x,3);
     }
+<<<<<<< HEAD
  }
 }
   else
@@ -560,5 +586,5 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
         exit();
     }
 include $tpl . "footer.php";
-ob_end_flush();
+obs_end_flush();
 ?>
