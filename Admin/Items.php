@@ -6,8 +6,9 @@
 */
 
 
-ob_start();
-session_start(); //Resume Session
+    ob_start();
+    session_start(); //Resume Session
+
     if(isset($_SESSION['username']))
     {
         $title = 'items';
@@ -69,47 +70,72 @@ session_start(); //Resume Session
                     ?>
                 </table>
             </div>
-                      <a href='itemForm.php' class="btn btn-primary"><li class="AddBtn fa fa-user-plus">Add a new Item</li></a>
+                      <a href='items.php?do=add' class="btn btn-primary"><li class="AddBtn fa fa-user-plus">Add a new Item</li></a>     
         </div> 
-        <?php 
+         <?php
         }
-          /*
+        /*
         ================================================
         ================== Add Form =================
         ================================================
         */
+    else if($do == "add")
+    {
+      ?>    
 
-        else if($do=='add')
-        {
-         ?>   
 <div class="container">
-  <h1 class="text-center">Add New Member</h1>
+  <h1 class="text-center">Add New Item</h1>
   <form class="form-horizontal" role="form" action="?do=insert" method="POST">
     <div class="form-group">
         <input type="hidden" name="userid">
-      <label class="control-label col-sm-2 col-md-3">UserName:</label>
+      <label class="control-label col-sm-2 col-md-3">ItemName:</label>
       <div class="col-sm-10 col-md-6">
-        <input type="text" class="form-control" name="username"
-               placeholder=" write not start with number username" autocomplete="off" required="required">
+        <input type="text" class="form-control" name="itemname"
+               placeholder="item name" autocomplete="off" required="required">
         </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-2 col-md-3" for="pwd">Password:</label>
+      <label class="control-label col-sm-2 col-md-3" for="description">Description:</label>
       <div class="col-sm-10 col-md-6">
-        <input type="password" class="password form-control" name="password" placeholder="write strong password here" autocomplete="new-password" required="required">
+        <input type="text" class="password form-control" name="description" placeholder="write description" autocomplete="new-password" required="required">
         <i class="show-pass fa fa-eye fa-2x"></i>
       </div>
     </div>
       <div class="form-group">
-      <label class="control-label col-sm-2 col-md-3" for="email">Email:</label>
+      <label class="control-label col-sm-2 col-md-3" for="price">Price:</label>
       <div class="col-sm-10 col-md-6">
-        <input type="email" class="form-control" name="email" placeholder="Your email" required="required">
+        <input type="text" class="form-control" name="price" placeholder="enter price" required="required">
       </div>
     </div>
       <div class="form-group">
-      <label class="control-label col-sm-2 col-md-3" for="pwd">FullName:</label>
+      <label class="control-label col-sm-2 col-md-3" for="adddate">Add_Date:</label>
       <div class="col-sm-10 col-md-6">          
-        <input type="text" class="form-control" name="fullname" placeholder="write your fullname" required="required">
+        <input type="date" class="form-control" name="adddate" placeholder="add date" required="required">
+      </div>
+      </div>
+      <div class="form-group">
+      <label class="control-label col-sm-2 col-md-3" for="countrymade">Country_Made:</label>
+      <div class="col-sm-10 col-md-6">          
+        <input type="text" class="form-control" name="countrymade" placeholder="country made in" required="required">
+      </div>
+      </div>
+      <div class="form-group">
+      <label class="control-label col-sm-2 col-md-3" for="status">Status:</label>
+      <div class="col-sm-10 col-md-6">          
+        <input type="text" class="form-control" name="status" placeholder="item status" required="required">
+      </div>
+      </div>
+      <div class="form-group">
+      <label class="control-label col-sm-2 col-md-3" for="catid">Cat_ID:</label>
+      <div class="col-sm-10 col-md-6">          
+        <input type="text" class="form-control" name="catid" placeholder="cat_id as forign key" required="required">
+      </div>
+      </div>
+      
+      <div class="form-group">
+      <label class="control-label col-sm-2 col-md-3" for="memberid">Member_ID:</label>
+      <div class="col-sm-10 col-md-6">          
+        <input type="text" class="form-control" name="memberid" placeholder="member_id as forign key" required="required">
       </div>
       </div>
     <div class="form-group">        
@@ -119,6 +145,7 @@ session_start(); //Resume Session
     </div>
   </form>
 </div>   
+
 <?php
 }
         /*
@@ -294,92 +321,115 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     }
         /*
             ===============================================================
-            ============== Insert code From $do=add =======================
+            ============== Insert code From $do=insert =======================
             ===============================================================
         */
-  else if($do == "insert")
+  else if($do == 'insert')
     {
-if($_SERVER['REQUEST_METHOD'] == "POST")
-    {
-    //collect Data By Post
-    $user = $_POST['username'];
-    $email = $_POST['email'];
-    $fullname = $_POST['fullname'];
-    $id = $_POST['userid'];
-    $pass = $_POST['password'];
-    $hash = sha1($pass);
-    //Validation in my form
-    $formError = array();
-    echo "<div class='container'>";
-    if(is_numeric($user))
-    {
-        $formError[0] = "username can't be a start with number";
-    }
-    if(is_numeric($fullname))
-    {
-        $formError[1] = "Fullname can't be a start with number";
-    }
-    if(empty($user))
-    {
-        $formError[2] = "You can't make username is <strong> Empty </strong>";
-    }
-    if(empty($email))
-    {
-        $formError[3] = "You can't make email is <strong> Empty </strong>";
-    }
-    if(empty($fullname))
-    {
-        $formError[4] = "You can't make fullname is <strong> Empty </strong>";
-    }
-    if(empty($pass))
-    {
-        $formError[5] = "You can't make password is <strong> Empty </strong>";
-    }
-    if(strlen($pass) < 6 )
-    {
-        $formError[6] = "Your password is week";
-    }
-    echo "</div>";
-    //Get Data By prepare statment
-    if(empty($formError))
-    {
-        /*
-        //I can use this way to Insert
-     $stmt = $con->prepare("Insert into users (Username,Email,Fullname,
-                          Password) values(?,?,?,?)");
-    //excute Data
-    $stmt->execute(array($user,$email,$fullname,sha1($pass)));    
-        */
-    //call CheckItem to check username is exit or not
-    $check = CheckItem('Username' , 'adminusers' , $user);
-    if($check == 1)
-    {
-        echo "<div class='container'>";
-        echo "<div class='alert alert-danger text-center'>" .'<h3>this username is already exit </h3></div>';
-        echo "</div>";
-        header("REFRESH:3 ; URL=members.php?do=add");   
-    }
-     else
-     {
-       $stmt = $con->prepare("Insert into adminusers (Username,Email,FullName,
-                          Password ,Date) values(:zuser , :zemail , :zfullname ,:zhash,now())");  
-    //excute Data
-    $stmt->execute(array(
-        'zuser' => $user ,
-        'zemail' => $email,
-        'zfullname' => $fullname ,
-        'zhash' => $hash
-    ));    
-    
-        
-    //Count the number of rows
-    
-    echo "<div class='container'>";
-    echo "<div class='alert alert-success text-center'>" .'<h3>1 Record inserted </h3></div>';
-    echo "</div>";
-        header("REFRESH:3 ; URL=members.php?do=add");   
-     }
-    }
+
+
+          if($_SERVER['REQUEST_METHOD'] == "POST")
+              {
+              //collect Data By Post
+              $itemName = $_POST['itemname'];
+              $description = $_POST['description'];
+              $price = $_POST['price'];
+              $date = $_POST['adddate'];
+              $countryMade = $_POST['countrymade'];
+              $status=$_POST['status'];
+              $catId=$_POST['catid'];
+              $memberId=$_POST['memberid'];
+              
+
+              //Validation in my form
+ 
+              $formError = array();
+              echo "<div class='container'>";
+              if(empty($itemName))
+              {
+                  $formError[0] = "Item Name can't be empty";
+                  echo"1<h1>shokry suleiman</h1>";
+              }
+              if(empty($description))
+              {
+                  $formError[1] = "description can't be empty";
+                  echo"2<h1>shokry suleiman</h1>";
+              }
+              if(empty($price))
+              {
+                  $formError[2] = "price can't be empty";
+                  echo"3<h1>shokry suleiman</h1>";
+              }
+              if(empty($date))
+              {
+                  $formError[3] = "date can't be empty";
+                  echo"4<h1>shokry suleiman</h1>";
+              }
+              if(empty($countryMade))
+              {
+                  $formError[4] = "country Made can't be empty ";
+                  echo"5<h1>shokry suleiman</h1>";
+              }
+              if(empty($status))
+              {
+                  $formError[5] = "status can't be empty";
+                  echo"<h1>6shokry suleiman</h1>";
+              }
+              if(empty($catId))
+              {
+                  $formError[6] = "catId can't be String";
+                  echo"<h1>7shokry suleiman</h1>";
+              }
+              if(empty($memberId))
+              {
+                  $formError[7] = "memberId can't be String";
+                  echo"<h1>8shokry suleiman</h1>";
+              }
+              echo "</div>";
+              //Get Data By prepare statment
+              if(empty($formError))
+              {
+                echo"<h1>shokry suleiman</h1>";
+                  /*
+                  //I can use this way to Insert
+               $stmt = $con->prepare("Insert into users (Username,Email,Fullname,
+                                    Password) values(?,?,?,?)");
+              //excute Data
+              $stmt->execute(array($user,$email,$fullname,sha1($pass)));    
+                  */
+              //call CheckItem to check username is exit or not
+
+            
+                 $stmt = $con->prepare("Insert into items(ItemID ,
+                        Name ,
+                Description ,
+                Price,
+                Add_Date ,
+                Country_Made ,
+                Status,
+                Cat_ID ,
+                Member_ID) values(:zname, :zdescription , :zprice ,:zAdd_Data,:zcoutrymade,:zstatus,:zcat_id,:zmember_id");  
+              //excute Data
+            
+              $stmt->execute(array(
+                  'zname' => $itemName ,
+                  'zdescription' => $description,
+                  'zprice' => $price ,
+                  'zAdd_Data' => $date,
+                  'zcoutrymade' => $countryMade ,
+                  'zstatus' => $status,
+                  'zcat_id' => $catId ,
+                  'zmember_id' => $memberId));    
+             
+               
+                
+              //Count the number of rows
+              
+              echo "<div class='container'>";
+              echo "<div class='alert alert-success text-center'>" .'<h3>1 Record inserted </h3></div>';
+              echo "</div>";
+                  header("REFRESH:3 ; URL=items.php?do=add");   
+            }
            else
             {
                /*
@@ -388,8 +438,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
                ==========================================
                */
 ?>
-<div class="container">
-  <h1 class="text-center">Add New Member</h1>
+
+<!--<div class="container">
+  <h1 class="text-center">Add New Item</h1>
   <form class="form-horizontal" role="form" action="?do=insert" method="POST">
     <div class="form-group">
         <input type="hidden" name="userid">
@@ -444,7 +495,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
       </div>
     </div>
   </form>
-</div>   
+</div>-->   
                 <?php
 //                foreach($formError as $error)
 //                {
@@ -463,36 +514,44 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
             ====================== Delete code ============================
             ===============================================================
         */
-        else if($do='delete')
-        {
-//check if value userid is define and is numeric
-      $userid = isset($_GET['userid'])&&is_numeric($_GET['userid']) ? intval($_GET['userid']) : 0;
-//preparing select Query
-    $stmt = $con->prepare("select * From adminusers where UserID = ? LIMIT 1");
-//excute Query in DB
-    $stmt->execute(array($userid));
-//Count the number of rows
-    $count = $stmt->rowCount();
-//if userid in my DB will appear my form    
+    else if($do='delete')
+    {
+            
+         //check if value userid is define and is numeric
+         $userid = isset($_GET['userid'])&&is_numeric($_GET['userid']) ? intval($_GET['userid']) : 0;
+
+         //preparing select Query
+         $stmt = $con->prepare("select * From adminusers where UserID = ? LIMIT 1");
+        
+         //excute Query in DB
+         $stmt->execute(array($userid));
+        
+         //Count the number of rows
+         $count = $stmt->rowCount();
+        
+        
+        //if userid in my DB will appear my form    
     if($count>0)
     {
         //this binding method to prevent Sql Injunction
         $stmt = $con->prepare('DELETE FROM adminusers WHERE UserID = :zuser');
+        
         //binding method
         $stmt->bindParam('zuser',$userid);
         $stmt->execute();  
+        
         echo "<div class='container'>";
         echo "<div class='alert alert-success text-center'>" .'<h2>1 Record Deleted </h2>  </div>';
         echo "<div class='alert alert-info text-center'><h3>You will Redirect to members page After 5 seconds</h3> </div>";
         header('REFRESH:5 ; URL=members.php');
         echo "</div>";
-        }
+    }
     else
     {
         $x = "This account is not Exit";
         RedirectFunc($x,3);
     }
-}
+ }
 }
   else
     {
