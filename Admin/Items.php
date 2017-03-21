@@ -5,8 +5,6 @@
 (2) --> Delete
 */
 
-
-<<<<<<< HEAD
     ob_start();
     session_start(); //Resume Session
 
@@ -71,7 +69,7 @@
                     ?>
                 </table>
             </div>
-<<<<<<< HEAD
+
                       <a href='items.php?do=add' class="btn btn-primary"><li class="AddBtn fa fa-user-plus">Add a new Item</li></a>     
         </div> 
          <?php
@@ -87,12 +85,12 @@
     {
       ?>    
 
-<<<<<<< HEAD
+
 <div class="container">
   <h1 class="text-center">Add New Item</h1>
   <form class="form-horizontal" role="form" action="?do=insert" method="POST">
     <div class="form-group">
-        <input type="hidden" name="userid">
+
       <label class="control-label col-sm-2 col-md-3">ItemName:</label>
       <div class="col-sm-10 col-md-6">
         <input type="text" class="form-control" name="itemname"
@@ -103,13 +101,13 @@
       <label class="control-label col-sm-2 col-md-3" for="description">Description:</label>
       <div class="col-sm-10 col-md-6">
         <input type="text" class="password form-control" name="description" placeholder="write description" autocomplete="new-password" required="required">
-=======
+
 
         <i class="show-pass fa fa-eye fa-2x"></i>
       </div>
     </div>
       <div class="form-group">
-<<<<<<< HEAD
+
       <label class="control-label col-sm-2 col-md-3" for="price">Price:</label>
       <div class="col-sm-10 col-md-6">
         <input type="text" class="form-control" name="price" placeholder="enter price" required="required">
@@ -154,7 +152,7 @@
     </div>
   </form>
 </div>   
-<<<<<<< HEAD
+
 
 <?php
 }
@@ -331,7 +329,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     }
         /*
             ===============================================================
-<<<<<<< HEAD
+
             ============== Insert code From $do=insert =======================
             ===============================================================
         */
@@ -356,81 +354,83 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
  
               $formError = array();
               echo "<div class='container'>";
-              if(empty($itemName))
+              if(empty($itemName)||is_numeric($itemName))
               {
-                  $formError[0] = "Item Name can't be empty";
-                  echo"1<h1>shokry suleiman</h1>";
+                  $formError[0] = "Item Name can't be empty OR Numeric ";
+
               }
-              if(empty($description))
+
+              if(empty($description)||is_numeric($description))
               {
-                  $formError[1] = "description can't be empty";
-                  echo"2<h1>shokry suleiman</h1>";
+                  $formError[1] = "description can't be empty OR Numeric ";
+
               }
-              if(empty($price))
+              if(empty($price)||!is_numeric($price))
               {
-                  $formError[2] = "price can't be empty";
-                  echo"3<h1>shokry suleiman</h1>";
+                  $formError[2] = "price can't be empty OR String";
+
               }
               if(empty($date))
               {
                   $formError[3] = "date can't be empty";
-                  echo"4<h1>shokry suleiman</h1>";
+
               }
-              if(empty($countryMade))
+              if(empty($countryMade)||is_numeric($countryMade))
               {
-                  $formError[4] = "country Made can't be empty ";
-                  echo"5<h1>shokry suleiman</h1>";
+                  $formError[4] = "country Made can't be empty OR Numric ";
+
               }
-              if(empty($status))
+              if(empty($status)||is_numeric($itemName))
               {
-                  $formError[5] = "status can't be empty";
-                  echo"<h1>6shokry suleiman</h1>";
+                  $formError[5] = "status can't be empty OR Numric ";
+
               }
-              if(empty($catId))
+              if(empty($catId)||!is_numeric($catId))
               {
                   $formError[6] = "catId can't be String";
-                  echo"<h1>7shokry suleiman</h1>";
+
               }
-              if(empty($memberId))
+              if(empty($memberId)||!is_numeric($memberId))
               {
                   $formError[7] = "memberId can't be String";
-                  echo"<h1>8shokry suleiman</h1>";
+
               }
               echo "</div>";
               //Get Data By prepare statment
               if(empty($formError))
               {
-                echo"<h1>shokry suleiman</h1>";
+
                   /*
                   //I can use this way to Insert
                $stmt = $con->prepare("Insert into users (Username,Email,Fullname,
                                     Password) values(?,?,?,?)");
               //excute Data
               $stmt->execute(array($user,$email,$fullname,sha1($pass)));    
-                  */
+                */
               //call CheckItem to check username is exit or not
 
             
-                 $stmt = $con->prepare("Insert into items(ItemID ,
-                        Name ,
+                 $stmt = $con->prepare("Insert into items(
+                 Name ,
                 Description ,
                 Price,
                 Add_Date ,
                 Country_Made ,
                 Status,
                 Cat_ID ,
-                Member_ID) values(:zname, :zdescription , :zprice ,:zAdd_Data,:zcoutrymade,:zstatus,:zcat_id,:zmember_id");  
+                Member_ID) values(?,?,?,?,?,?,?,?)");
               //excute Data
             
               $stmt->execute(array(
-                  'zname' => $itemName ,
-                  'zdescription' => $description,
-                  'zprice' => $price ,
-                  'zAdd_Data' => $date,
-                  'zcoutrymade' => $countryMade ,
-                  'zstatus' => $status,
-                  'zcat_id' => $catId ,
-                  'zmember_id' => $memberId));    
+                  $itemName ,
+                   $description,
+                  $price ,
+                   $date,
+                   $countryMade ,
+                   $status,
+                  $catId,
+                  $memberId
+                  ));
              
                
                 
@@ -451,68 +451,112 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
                ==========================================
                */
 ?>
-<<<<<<< HEAD
 
-<!--<div class="container">
+
+<div class="container">
   <h1 class="text-center">Add New Item</h1>
-=======
   <form class="form-horizontal" role="form" action="?do=insert" method="POST">
     <div class="form-group">
-        <input type="hidden" name="userid">
-      <label class="control-label col-sm-2 col-md-3">UserName:</label>
+      <label class="control-label col-sm-2 col-md-3">ItemName:</label>
       <div class="col-sm-10 col-md-6 has-error">
-        <input type="text" class="form-control" name="username"
-               placeholder=" write not start with number username" autocomplete="off" required="required">
+        <input type="text" class="form-control" name="itemname"
+               autocomplete="off" required="required">
     <?php
     if(isset($formError[0])) 
-        echo "<div class='error_valid alert alert-danger'>".$formError[0]."</div>"; 
-    if(isset($formError[3]))
-    {
-        echo "<div class='error_valid alert alert-danger'>".$formError[2]."</div>"; 
-    }   
+        echo "<div class='error_valid alert alert-danger'>".$formError[0]."</div>";
     ?> 
     </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-2 col-md-3" for="pwd">Password:</label>
+      <label class="control-label col-sm-2 col-md-3" for="pwd">Description:</label>
       <div class="col-sm-10 col-md-6 has-error">
-        <input type="password" class="password form-control" name="password" placeholder="write strong password here" autocomplete="new-password" required="required">
+        <input type="text" class="password form-control" name="description"  autocomplete="new-password" required="required">
         <i class="show-pass fa fa-eye fa-2x"></i>
     <?php
-    if(isset($formError[5])) 
-        echo "<div class='error_valid alert alert-danger'>".$formError[5]."</div>";
-    if(isset($formError[6])) 
-        echo "<div class='error_valid alert alert-danger'>".$formError[6]."</div>"; 
-    ?>
-      </div>
-    </div>
-      <div class="form-group">
-      <label class="control-label col-sm-2 col-md-3" for="email">Email:</label>
-      <div class="col-sm-10 col-md-6">
-        <input type="email" class="form-control" name="email" placeholder="Your email" required="required">
-      </div>
-    </div>
-      <div class="form-group">
-      <label class="control-label col-sm-2 col-md-3" for="pwd">FullName:</label>
-      <div class="col-sm-10 col-md-6 has-error">
-        <input type="text" class="form-control" name="fullname" placeholder="write your fullname" required="required">
-    
-    <?php
-        if(isset($formError[1])) 
+    if(isset($formError[1]))
         echo "<div class='error_valid alert alert-danger'>".$formError[1]."</div>";
     ?>
+      </div>
+    </div>
+      <div class="form-group">
+      <label class="control-label col-sm-2 col-md-3" for="price">Price:</label>
+      <div class="col-sm-10 col-md-6">
+        <input type="text" class="form-control" name="price"  required="required">
+
+        <?php
+                if(isset($formError[2]))
+                echo "<div class='error_valid alert alert-danger'>".$formError[2]."</div>";
+            ?>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+          <label class="control-label col-sm-2 col-md-3" for="price">Date:</label>
+          <div class="col-sm-10 col-md-6">
+            <input type="date" class="form-control" name="adddate"  required="required">
+
+          </div>
+        </div>
+      <div class="form-group">
+      <label class="control-label col-sm-2 col-md-3" for="pwd">Country_Made:</label>
+      <div class="col-sm-10 col-md-6 has-error">
+        <input type="text" class="form-control" name="countrymade" required="required">
+    
+    <?php
+        if(isset($formError[4]))
+        echo "<div class='error_valid alert alert-danger'>".$formError[4]."</div>";
+    ?>
     
       </div>
       </div>
+
+           <div class="form-group">
+                <label class="control-label col-sm-2 col-md-3" for="pwd">Status:</label>
+                <div class="col-sm-10 col-md-6 has-error">
+                  <input type="text" class="form-control" name="status" required="required">
+
+              <?php
+                  if(isset($formError[5]))
+                  echo "<div class='error_valid alert alert-danger'>".$formError[5]."</div>";
+              ?>
+      </div>
+      </div>
+
+
+       <div class="form-group">
+            <label class="control-label col-sm-2 col-md-3" for="pwd">Cat_ID:</label>
+            <div class="col-sm-10 col-md-6 has-error">
+              <input type="text" class="form-control" name="catid" required="required">
+
+          <?php
+              if(isset($formError[6]))
+              echo "<div class='error_valid alert alert-danger'>".$formError[6]."</div>";
+          ?>
+       </div>
+       </div>
+
+
+       <div class="form-group">
+                   <label class="control-label col-sm-2 col-md-3" for="pwd">Memeber_ID:</label>
+                   <div class="col-sm-10 col-md-6 has-error">
+                     <input type="text" class="form-control" name="memberid" required="required">
+
+                 <?php
+                     if(isset($formError[7]))
+                     echo "<div class='error_valid alert alert-danger'>".$formError[7]."</div>";
+                 ?>
+              </div>
+              </div>
+
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10 col-md-8">
         <button type="submit" class="btn btn-primary" id="myBtn">save</button>
       </div>
     </div>
   </form>
-<<<<<<< HEAD
-</div>-->   
-=======
+
+</div>
 </div>
                 <?php
 //                foreach($formError as $error)
@@ -521,6 +565,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
 //                }
             }   
     }
+
+
       else
     {
         $x = "You cant' go to this page Directly";
@@ -532,7 +578,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
             ====================== Delete code ============================
             ===============================================================
         */
-<<<<<<< HEAD
+
     else if($do='delete')
     {
             
@@ -550,13 +596,13 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
         
         
         //if userid in my DB will appear my form    
-=======
+
 
     if($count>0)
     {
         //this binding method to prevent Sql Injunction
         $stmt = $con->prepare('DELETE FROM adminusers WHERE UserID = :zuser');
-<<<<<<< HEAD
+
         
         //binding method
         $stmt->bindParam('zuser',$userid);
@@ -568,7 +614,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
         echo "<div class='alert alert-info text-center'><h3>You will Redirect to members page After 5 seconds</h3> </div>";
         header('REFRESH:5 ; URL=members.php');
         echo "</div>";
-<<<<<<< HEAD
+
     }
 
     else
@@ -576,7 +622,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
         $x = "This account is not Exit";
         RedirectFunc($x,3);
     }
-<<<<<<< HEAD
+
  }
 }
   else
@@ -586,5 +632,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
         exit();
     }
 include $tpl . "footer.php";
-obs_end_flush();
+ob_end_flush();
+
 ?>
