@@ -38,8 +38,7 @@
                         <th>Add_Date</th>
                         <th>Country_Made</th>
                         <th>Status</th>
-                        <th>Cat_ID</th>
-                        <th>Member_ID</th>
+                        
                         <th>Control</th>
                     </tr>
                     <?php
@@ -53,14 +52,13 @@
                         echo "<td>" .$row['Add_Date']."</td>";
                         echo "<td>" .$row['Country_Made']."</td>";
                         echo "<td>" .$row['Status']."</td>";
-                        echo "<td>" .$row['Cat_ID']."</td>";
-                        echo "<td>" .$row['Member_ID']."</td>";
+                        
                         echo "<td>";
                         echo "<a href='items.php?do=edit&ItemID=".$row['ItemID']."'class='EditBtn btn btn-success'><i class ='fa fa-edit'></i>
                         Edit</a>";
                         if($row['ItemID']>1)
                         {
-                        echo "<a href='itemDelete.php?do=delete&ItemID=".$row['ItemID']."' class='btn btn-danger confirm'><i class ='fa fa-close'></i>Delete</a>";
+                        echo "<a href='items.php?do=delete&ItemID=".$row['ItemID']."' class='btn btn-danger confirm'><i class ='fa fa-close'></i>Delete</a>";
                         echo "</td>";
                         echo "</tr>";
                         }
@@ -97,15 +95,7 @@
                placeholder="item name" autocomplete="off" required="required">
         </div>
     </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2 col-md-3" for="description">Description:</label>
-      <div class="col-sm-10 col-md-6">
-        <input type="text" class="password form-control" name="description" placeholder="write description" autocomplete="new-password" required="required">
-
-
-        <i class="show-pass fa fa-eye fa-2x"></i>
-      </div>
-    </div>
+    
       <div class="form-group">
 
       <label class="control-label col-sm-2 col-md-3" for="price">Price:</label>
@@ -145,6 +135,14 @@
 
       </div>
       </div>
+      <div class="form-group">
+      <label class="control-label col-sm-2 col-md-3" for="description">Description:</label>
+      <div class="col-sm-10 col-md-6">
+          <textarea class="password form-control" name="description" placeholder="write description" autocomplete="new-password" required="required"></textarea>
+
+
+      </div>
+    </div>
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10 col-md-8">
         <button type="submit" class="btn btn-primary" id="myBtn">save</button>
@@ -312,7 +310,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     echo "<div class='container'>";
     echo "<div class='alert alert-success text-center'>" .'<h3> Update'. $count .' Record </h3></div>';
     echo "</div>";
-    header("REFRESH:3 ; URL=members.php?do=edit&ItemID=$itemId");
+    header("REFRESH:2 ; URL=items.php");
     }
            else
             {
@@ -557,7 +555,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
   </form>
 
 </div>
-</div>
+
                 <?php
 //                foreach($formError as $error)
 //                {
@@ -583,13 +581,13 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     {
             
          //check if value userid is define and is numeric
-         $userid = isset($_GET['userid'])&&is_numeric($_GET['userid']) ? intval($_GET['userid']) : 0;
+         $Item_ID = isset($_GET['ItemID'])&&is_numeric($_GET['ItemID']) ? intval($_GET['ItemID']) : 0;
 
          //preparing select Query
-         $stmt = $con->prepare("select * From adminusers where UserID = ? LIMIT 1");
+         $stmt = $con->prepare("select * From items where ItemID = ? LIMIT 1");
         
          //excute Query in DB
-         $stmt->execute(array($userid));
+         $stmt->execute(array($Item_ID));
         
          //Count the number of rows
          $count = $stmt->rowCount();
@@ -601,18 +599,18 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     if($count>0)
     {
         //this binding method to prevent Sql Injunction
-        $stmt = $con->prepare('DELETE FROM adminusers WHERE UserID = :zuser');
+        $stmt = $con->prepare('DELETE FROM items WHERE ItemID = :zitem');
 
         
         //binding method
-        $stmt->bindParam('zuser',$userid);
+        $stmt->bindParam('zitem',$Item_ID);
         $stmt->execute();  
         
 
         echo "<div class='container'>";
         echo "<div class='alert alert-success text-center'>" .'<h2>1 Record Deleted </h2>  </div>';
-        echo "<div class='alert alert-info text-center'><h3>You will Redirect to members page After 5 seconds</h3> </div>";
-        header('REFRESH:5 ; URL=members.php');
+        echo "<div class='alert alert-info text-center'><h3>You will Redirect to Items page After 5 seconds</h3> </div>";
+        header('REFRESH:2 ; URL=items.php');
         echo "</div>";
 
     }
