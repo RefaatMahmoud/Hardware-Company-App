@@ -1,0 +1,12 @@
+﻿body {
+    background-color:lightgray;
+}
+div {
+    display: block;
+}
+img {
+    margin:auto;
+}
+section {
+    padding:100px 0;
+}
