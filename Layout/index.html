@@ -1,58 +1,314 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
+    <!-- Meta Files -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Home</title>
-    <link href="CSS/bootstrap.css" rel="stylesheet" />
-    <script src="JS/jquery-1.9.1.js"></script>
-    <script src="JS/bootstrap.js"></script>
-    <link href="CSS/slideshow.css" type="text/css" rel="stylesheet" />
+
+    <!-- Style Files -->
+    <link href="Css/bootstrap.min.css" rel="stylesheet">
+    <link href="Css/index.css" rel="stylesheet" />
+
+    <!-- Scripting Files-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="JS/jquery-3.1.1.min.js"></script>
+    <script src="JS/jquery.easing.min.js"></script>
+    <script src="JS/bootstrap.min.js"></script>
+    <script src="JS/index.js"></script>
+
 </head>
-<body>
-    <!--Start Slideshow-->
-    <div class="container-fluid">
-        <section class="row">
-            <div id="img" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#img" data-slide-to="0" class="active"></li>
-                    <li data-target="#img" data-slide-to="1"></li>
-                    <li data-target="#img" data-slide-to="2"></li>
-                    <li data-target="#img" data-slide-to="3"></li>
-                </ol>
-                <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                        <img src=""/>
-                        <div class="carousel-caption"></div>
-                    </div>
-                    
-                    <div class="item">
-                        <img src=""/>
-                        <div class="carousel-caption"></div>
-                    </div>
 
-                    <div class="item">
-                        <img src=""/>
-                        <div class="carousel-caption"></div>
-                    </div>
 
-                    <div class="item">
-                        <img src=""/>
-                    </div>
-                </div>
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 
-                <!-- Arrows Navigator -->
-                <a class="left carousel-control" href="#img" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#img" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-                <!-- End Arrows Navigator -->
+<!--=================================== Navigatin Bar ================================-->
 
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+         
+        <div class="container">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Technology</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top"><img src="Images/logos/Tecnoshop.png" height="30" width="200" class="logo"/></a>
             </div>
-        </section>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a class="page-scroll" href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#services">Services</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                </ul>
+                <form class="navbar-form navbar-left">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search" size="10">
+                  </div>
+                  <button type="submit" class="btn btn-default">Go</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <!--/.navigation bar -->
+
+    <!--================================ Carousel====================================== -->
+
+    
+
+    <!--================================ Categories =================================== -->
+
+    <div class="container marketing">
+
+        <!-- Three columns of text and images below the carousel -->        
+        <div class="row">
+
+            <!-- 1.LAPTOP -->
+            <div class="col-lg-4">
+                <img class="img-circle grow" src="Images/Cate/laptop.png" width="200" height="200">
+                <h2>Laptops</h2>
+                <p>
+                    Laptops are computers that you can take everywhere with you without hassle.
+                    They can take up very little space and be used for hours without access to power.
+                </p>
+				<div class="dropdown"  >
+					<button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					LAPTOPS
+					<span class="caret"></span></button>
+					<ul class="dropdown-menu dropdown-menu-center " role="menu" aria-labelledby="menu1" style="margin-left:100px">
+					  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">DELL</a></li>
+					  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">HP</a></li>
+					  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">APPLE</a></li>
+					  <li role="presentation" class="divider"></li>
+					  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">SAMSUNG</a></li>
+					  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">LG</a></li>
+					  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">ASUS</a></li>
+					  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">ACER</a></li>
+					</ul>
+				</div>
+				
+				
+            </div>
+			
+			
+
+            <!-- 2.MOBILE PHONES -->
+            <div class="col-lg-4">
+                <img class="img-circle grow" src="Images/Cate/mob.png" width="200" height="200">
+                <h2>Smart Phones</h2>
+                <p>
+                    Smartphones are a part of daily life. They help us to stay connected.
+                    The most popular types of smartphones are the iPhone,
+                    Windows phones, Android, and Amazon's Fire Phone.
+                </p>
+                <div class="dropdown"  >
+					<button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					MOPILE PHONES
+					<span class="caret"></span></button>
+					<ul class="dropdown-menu dropdown-menu-center " role="menu" aria-labelledby="menu1" style="margin-left:100px">
+					  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">SAMSUNG</a></li>
+					  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">NOKIA</a></li>
+					  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">IPhone</a></li>
+					  <li role="presentation" class="divider"></li>
+					  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">HUEWI</a></li>
+					  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">HTC</a></li>
+					  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">SONY</a></li>
+					  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">LG</a></li>
+					</ul>
+				</div>
+            </div>
+            
+            <!-- 3.TABLETS -->
+            <div class="col-lg-4">
+                <img class="img-circle grow" src="Images/Cate/Taplet.png" width="200" height="200">
+                <h2>Tablets</h2>
+                <p>
+                    A tablet computer, commonly shortened to tablet, is a thin,
+                    flat mobile computer with a touchscreen display, which is usually in color,
+                    processing circuitry, and a rechargeable battery in a single device.
+                </p>
+                <div class="dropdown"  >
+					<button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					TAPLETS
+					<span class="caret"></span></button>
+					<ul class="dropdown-menu dropdown-menu-center " role="menu" aria-labelledby="menu1" style="margin-left:100px">
+					  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">DELL</a></li>
+					  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">HP</a></li>
+					  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">APPLE</a></li>
+					  <li role="presentation" class="divider"></li>
+					  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">SAMSUNG</a></li>
+					  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">LG</a></li>
+					  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">ASUS</a></li>
+					  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">ACER</a></li>
+					</ul>
+				</div>
+            </div>
+        </div>
+        <!--End of Categories -->
+
+        <!-- =============================== COVER ======================================== -->
+        <div class="row">
+            
+            <img src="Images/Covers/cover3.jpg" class="img-responsive center-block cover">
+           
+        </div>
+
+        <!--=================================== FEATURETTES ================================== -->
+
+        <hr class="featurette-divider">
+
+        <!-- 1.Save Time -->
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2 class="featurette-heading">Save Time</h2>
+                <p class="lead">
+                    Do you have the specific list that you want to buy? With just a couple of clicks of the mouse,
+                    you can purchase your shopping orders and instantly move to other important things, which can save time. 
+                </p>
+            </div>
+            <div class="col-md-5">
+                <img src="Images/Features/save_time.jpg" class="featurette-image img-responsive center-block" width="500" height="500">
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <!-- 2.Save Fuel -->
+        <div class="row featurette">
+            <div class="col-md-7 col-md-push-5">
+                <h2 class="featurette-heading">Save Fuel</h2>
+                <p class="lead">
+                    The market of fuel industries battles from increasing and decreasing its cost every now and again,
+                    but no matter how much the cost of fuel are it does not affect your shopping errands.
+                    One of the advantages of shopping online is that there is no need for vehicles,
+                    so no purchase of fuel necessary.
+                </p>
+            </div>
+            <div class="col-md-5 col-md-pull-7">
+                <img src="Images/Features/save_feul.png" class="featurette-image img-responsive center-block" width="500" height="500">
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <!-- 3.Save Energy -->
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2 class="featurette-heading">Save Energy</h2>
+                <p class="lead">
+                    Admit it, it is tiresome to shop from one location and transfer to another location.
+                    What is worse is that there are no available stocks for the merchandise you want to buy.
+                    In online shopping, you do not need to waste your precious energy when buying. 
+                </p>
+            </div>
+            <div class="col-md-5">
+                <img src="Images/Features/energy.jpg" class="featurette-image img-responsive center-block" width="500" height="500">
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <!-- 4.Comparison of Prices -->
+        <div class="row featurette">
+            <div class="col-md-7 col-md-push-5">
+                <h2 class="featurette-heading">Comparison of Prices</h2>
+                <p class="lead">
+                    The advanced innovation of search engine allows you to easily check prices and compare with just a few clicks.
+                    It is very straightforward to conduct price comparisons from one online shopping website to another.
+                    This gives you the freedom to determine which online store offers the most affordable item you are going to buy. 
+                </p>
+            </div>
+            <div class="col-md-5 col-md-pull-7">
+                <img src="Images/Features/Price-Comaprison.jpg" class="featurette-image img-responsive center-block" width="500" height="500">
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <!-- 5.24/7 Availability -->
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2 class="featurette-heading">24/7 Availability</h2>
+                <p class="lead">
+                    Online shopping stores are open round the clock of 24/7, 7 days a week and 365 days.
+                    It is very rare to find any conventional retail stores that are open 24/7.
+                    The availability of online stores give you the freedom to shop at your own pace and convenience. 
+                </p>
+            </div>
+            <div class="col-md-5">
+                <img src="Images/Features/Open24Hrs.png" class="featurette-image img-responsive center-block" height="250">
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <!-- 6.Hate Waiting in Lines -->
+        <div class="row featurette">
+            <div class="col-md-7 col-md-push-5">
+                <h2 class="featurette-heading">Hate Waiting in Lines</h2>
+                <p class="lead">
+                    When buying items online, there are no long lines you have to endure, just to buy your merchandise.
+                    The idea of shopping online is cutting down those bad habits of standing in a long line and just waiting.
+                    Every online store is designed with unique individual ordering features to purchase the item.  
+                </p>
+            </div>
+            <div class="col-md-5 col-md-pull-7">
+                <img src="Images/Features/line.jpg" class="featurette-image img-responsive center-block" width="500" height="500">
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <!-- 7.Easy to Search -->
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2 class="featurette-heading">Easy to Search Merchandise You Want to Buy</h2>
+                <p class="lead">
+                    You are able to look for specific merchandise that includes model number, style, size, and color that you want to purchase.
+                    In addition, it is easy to determine whether the products are available or out of stock.  
+                </p>
+            </div>
+            <div class="col-md-5">
+                <img src="Images/Register-Your-Business.gif" class="featurette-image img-responsive center-block" width="500" height="500">
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <!-- END THE FEATURETTES -->
+
     </div>
-    <!--End Slideshow-->
+    <!--*****************************End of Container*****************************-->
+
+    <!-- ****************************************FOOTER**************************************-->
+        <footer>
+
+            <p class="pull-right"><a href="#">Back to top</a></p>
+            <p>&copy; SWE project Team, &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+
+        </footer>
+        <!--END OF FOOTER-->
+
 </body>
 </html>
