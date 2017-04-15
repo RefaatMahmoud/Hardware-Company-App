@@ -6,40 +6,50 @@
   <script src="jquery-1.9.1.js"></script>
   <script src="bootstrap.js"></script>
   <link href="CSS/formstyle.css" type="text/css" rel="stylesheet">
-    <script src="jquery-3.1.1.js"></script>
   <script type="text/javascript">
-      $(document).ready(function () {
-          $('#B_div').hide();
-          $('#btn').click(function () {
-              $('#B_div').show();
-          });
-          $('#sub').onclick(function () {
-              $('#B_div').hide();
-          });
-      });
-
+    
+    var b = document.getElementById('B_div');
+    var btn = document.getElementById("Btn");
+    var span = document.getElementsByClassName("close")[0];
+    
+    btn.onclick = function() {
+      b.style.display = "block";
+    }
+    
+    span.onclick = function() {
+      b.style.display = "none";
+    }
+    
+    window.onclick = function(event) {
+      if (event.target == b) {
+        b.style.display = "none";
+      }
+    }
+    
   </script>
 </head>
 <body>
-  <input type='button' id="btn"  value="Buy"/>
-  <div id="B_div" class="container">
-    <div id="form" class="container center-block">
-      <form class="container-fluid">
-          <div class="text-center form-group email">
-              <label>
-                  <input type="email" placeholder="Email" required/>
-                   (name@domain.com)
-              </label>
-          </div>
-          <div id="Pas" class="text-center form-group">
-              <label>
-                  <input type="password" placeholder="Password"/>
-              </label>
-          </div>
-          <button id="sub" type="submit" class="btn btn-primary ">Submit</button>
-      </form>
-    </div>
-  </div>
 
+<button id="Btn">Buy</button>
+
+<div id="B_div" class="b_div">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <form class="container-fluid">
+		<div class="text-center form-group email">
+			<label>
+				<input type="email" placeholder="Email" required/>
+				(name@domain.com)
+            </label>
+        </div>
+        <div id="Pas" class="text-center form-group">
+            <label>
+				<input type="password" placeholder="Password"/>
+            </label>
+        </div>
+        <button id="sub" type="submit" class="btn btn-primary ">Submit</button>
+    </form>
+  </div>
+</div>
 </body>
 </html>
