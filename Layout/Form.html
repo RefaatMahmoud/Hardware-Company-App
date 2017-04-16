@@ -6,28 +6,7 @@
   <script src="jquery-1.9.1.js"></script>
   <script src="bootstrap.js"></script>
   <link href="CSS/formstyle.css" type="text/css" rel="stylesheet">
-  <script type="text/javascript">
-    
-    var b = document.getElementById('B_div');
-    var btn = document.getElementById("Btn");
-    var span = document.getElementsByClassName("close")[0];
-    
-    btn.onclick = function() {
-      b.style.display = "block";
-    }
-    
-    span.onclick = function() {
-      b.style.display = "none";
-    }
-    
-    window.onclick = function(event) {
-      if (event.target == b) {
-        b.style.display = "none";
-      }
-    }
-    
-  </script>
-</head>
+  </head>
 <body>
 
 <button id="Btn">Buy</button>
@@ -51,5 +30,25 @@
     </form>
   </div>
 </div>
+<script type="text/javascript">
+    var b = document.getElementById('B_div');
+    var btn = document.getElementById("Btn");
+    var span = document.getElementsByClassName("close")[0];
+    
+    btn.onclick = function() {
+      b.style.display = "block";
+    }
+    
+    span.onclick = function() {
+      b.style.display = "none";
+    }
+    
+    window.onclick = function(event) {
+      if (event.target == b) {
+        b.style.display = "none";
+      }
+    }
+    
+</script>
 </body>
 </html>
