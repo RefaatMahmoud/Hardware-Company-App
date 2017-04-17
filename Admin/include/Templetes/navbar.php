@@ -20,9 +20,9 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['username']?><span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="members.php?do=edit&userid=<?php session_start();  echo $_SESSION['ID'] ?>">Edit Profile</a></li>
+            <li><a href="#">Visit-Shop</a></li>
             <li><a href="#">Setting</a></li>
             <li><a href="logout.php">Log out</a></li>
           </ul>
