@@ -1,11 +1,27 @@
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Gist
+ @RefaatMahmoud
+ Sign out
+ Watch 4
+  Star 1
+ Fork 4 RefaatMahmoud/Lab_Project
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Pulse  Graphs  Settings
+Branch: master Find file Copy pathLab_Project/Admin/Items.php
+7f738a8  29 days ago
+@HusseinAsous-Git HusseinAsous-Git Items Update(1)
+2 contributors @RefaatMahmoud @HusseinAsous-Git
+RawBlameHistory     
+505 lines (491 sloc)  18.8 KB
 <?php
 /*
 =================== Manage =================
 (1) --> Edit
 (2) --> Delete
 */
-
-
 ob_start();
 session_start(); //Resume Session
     if(isset($_SESSION['username']))
@@ -78,7 +94,6 @@ session_start(); //Resume Session
         ================== Add Form =================
         ================================================
         */
-
         else if($do=='add')
         {
          ?>   
@@ -503,3 +518,5 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
 include $tpl . "footer.php";
 ob_end_flush();
 ?>
+Contact GitHub API Training Shop Blog About
+© 2017 GitHub, Inc. Terms Privacy Security Status Help
