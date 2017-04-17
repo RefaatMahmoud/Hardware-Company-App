@@ -37,7 +37,10 @@ legend span
 {
     color:#06cd39;
 }
+
 /*End Login Form*/
+
+
 /*Start Navbar*/
 .navbar
 {
@@ -63,6 +66,7 @@ legend span
     font-size: 15px;
 }
 /*End Navbar*/
+
 /*Start in Edit members*/
 .form-group
 {
@@ -94,8 +98,12 @@ font-size: 18px;
     top:2px;
     font-size: 25px;
 }
+
 /*End-Asterix && eye*/
+
 /*End Edit Members*/
+
+
 /*Strart in Manage members tables*/
 .main-table th
 {
@@ -124,6 +132,10 @@ font-size: 18px;
     font-size: 20px;
 }
 /*End in manger members tables*/
+
+/*End in Manage members*/
+
+
 /*Start Dashboard*/
 .home-stat .stat
 {
@@ -190,6 +202,14 @@ font-size: 18px;
     background-color: #22eaaa;
     color: #FFF;
 }
+
+/*Strart plus*/
+.plus-info
+{
+    cursor: pointer;
+}
+/*End Plus*/
+
 /*Start in leatest 5 */
 .even
 {
@@ -216,20 +236,5 @@ font-size: 18px;
     position: absolute;
     right: -9px;
 }
-
 /*End in leatest 5*/
 /*End Dashboard*/
-/*End in Manage members*/
-
-/*Strart validation in Insert */
-.error_valid
-{
-    width: 350px;
-    float: left;
-    margin-left: 0px;
-    margin-top: 10px;
-    height: 30px;
-    margin-bottom: -10px;
-    padding:0px 0px 0px 5px;
-}
-/*End validation in in insert*/
