@@ -19,7 +19,7 @@ may appear error in header
                         <i class="fa fa-user-circle"></i>
                         <div class="info">
                             Total Members
-                        <span><a href="members.php"><?php echo CountItems('UserID','adminusers') +1?></a></span>
+                        <span><a href="members.php"><?php echo CountItems('UserID','adminusers') ?></a></span>
                         </div>
                     </div>
                 </div>
@@ -37,7 +37,7 @@ may appear error in header
                         <i class="fa fa-cubes"></i>
                         <div class="info">
                              Total Items
-                        <span><a href="Items.php">0</a></span>
+                        <span><a href="Items.php"><?php echo CountItems('ItemID','items') ?></a></span>
                         </div>
                     </div>
                 </div>
@@ -46,7 +46,7 @@ may appear error in header
                         <i class="fa fa-glide"></i>
                         <div class="info">
                              Total Categories
-                        <span>0</span>
+                        <span><a href="categories.php"><?php echo CountItems('ID','categories') ?></a></span>
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,8 @@ may appear error in header
                 <div class="col-sm-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-users"></i>The Latest Registered users    
+                            <i class="fa fa-users"></i>The Latest Registered users
+                             <span class="latest-element pull-right"><i class="plus-info fa fa-plus"></i></span>
                         </div>
                         <div class="panel-body">
                             <?php
@@ -94,10 +95,37 @@ may appear error in header
                  <div class="col-sm-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-tags"></i>The Latest tags    
+                            <i class="fa fa-tags"></i>The Latest Items
+                            <span class="latest-element pull-right"><i class="plus-info fa fa-plus"></i></span>
                                 </div>
                                     <div class="panel-body">
-                                        Test
+                                        <?php
+                            $arr = getLeatest('*','Items','ItemID',5);
+                        //will get index of Username in this array
+                            $counter =0 ;
+                            foreach($arr as $val)
+                            {
+                                $counter++;
+                                if($counter%2==0)
+                                {
+                                    echo "<div class='even'>";
+            
+                                    echo $val['Name'];
+                                    
+                                     echo "<a href='Items.php?do=edit&Item_id=".$val['ItemID']."'class='EditBtn btn btn-success'><i class ='fa fa-edit'></i>
+                                     Edit</a>";
+                                    echo "</div>";
+                                }
+                                else {
+                                    echo "<div class='odd'>";
+                                    echo $val['Name'];
+                                    echo "<a href='Items.php?do=edit&userid=" . $val['ItemID'] . "'class='EditBtn btn btn-success'><i class ='fa fa-edit'></i>
+                                    Edit</a>";
+                                    echo "</div>";
+                                }
+                            }
+                            
+                            ?>
                                     </div>
                                 </div>
                             </div>
