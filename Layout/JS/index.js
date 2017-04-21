@@ -17,3 +17,11 @@ $(function () {
         event.preventDefault();
     });
 });
+
+$(".top").click(function()
+      {
+        $("body , html").animate(
+        {
+            scrollTop : 0
+        },1000);
+      })
