@@ -1,0 +1,145 @@
+
+
+.search {
+    margin-top:100px;
+    margin-bottom:20px;
+}
+
+
+.dropdown.dropdown-lg .dropdown-menu {
+    margin-top: -1px;
+    padding: 6px 20px;
+}
+.navbar-header{
+	background-color: #732156;
+}
+.navbar-inverse .navbar-collapse{
+	background-color: #732156;
+}
+
+.input-group-btn .btn-group {
+    display: flex !important;
+}
+.btn-group .btn {
+    border-radius: 0;
+    margin-left: -1px;
+}
+.btn-group .btn:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.btn-group .form-horizontal .btn[type="submit"] {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.form-horizontal .form-group {
+    margin-left: 0;
+    margin-right: 0;
+}
+.form-group .form-control:last-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+@media screen and (min-width: 768px) {
+    #adv-search {
+        width: 500px;
+        margin: 0 auto;
+    }
+    .dropdown.dropdown-lg {
+        position: static !important;
+    }
+    .dropdown.dropdown-lg .dropdown-menu {
+        min-width: 500px;
+    }
+}
+
+
+.right-nav {
+    background-color:black;
+}
+.sidenav li{
+	list-style-type:none;
+	display:block;
+}
+.sidenav ul li {
+	list-style-type:none;
+	display:block;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+}
+.sidenav ul li :hover{
+	background:rgba(0, 0, 0, 0.16);
+	transition: linear all 0.40s;
+	margin-left: 12px 
+}
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 50px;
+    right: 0;
+    background-color: #732156;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 18px 8px 12px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+	
+}
+
+.sidenav a:hover, .offcanvas a:focus{
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 50px;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
+
+.left {
+
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg); 
+}
+
+
+.product-top {
+    margin-top:10px;
+}
+
+.btn-primary {
+	padding:6px 15px;
+	margin-left:42%;
+	background-color:#732156;
+}
+.relative {
+    position : fixed;
+}
+
+.arrow {
+    border-radius:90px;
+    position: absolute;
+    top:400px;
+    right: 0px;    /*-200*/
+    margin-left: 100px;
+
+}
