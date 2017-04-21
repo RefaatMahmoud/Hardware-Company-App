@@ -14,7 +14,13 @@ session_start(); //Resume Session
         */
         if($do == "manage")
         {
-            $stmt=$con->prepare("select * from categories");
+            $sort = 'asc';
+			$sort_array = array('asc', 'desc');
+			if (isset($_GET['sort']) && in_array($_GET['sort'], $sort_array)) 
+            {
+				$sort = $_GET['sort'];
+			}
+            $stmt=$con->prepare("select * from categories ORDER BY Name $sort");
             $stmt->execute();
             //get all data from many record
             $rows = $stmt->fetchAll();
