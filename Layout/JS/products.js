@@ -16,6 +16,13 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
 
+function hidelist() {
+        document.getElementById('list')
+        if (list.style.display == 'none')
+            list.style.display = 'block';
+        else
+            list.style.display = 'none';
+}
 
 
 $(document).ready(function () {
@@ -124,14 +131,7 @@ $(document).ready(function () {
             }
         }
     })
-    function hidelist() {
-        document.getElementById('list')
-        if (list.style.display == 'none')
-            list.style.display = 'block';
-        else
-            list.style.display = 'none';
-    }
-
+    
 
 
 });
