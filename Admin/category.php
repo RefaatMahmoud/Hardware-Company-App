@@ -147,3 +147,113 @@ session_start(); //Resume Session
             =============================================
         */
         
+         /*
+            ============================================
+            ========== Insert code From $do=add ========
+            ============================================
+        */
+        else if($do == "insert")
+        {
+            if($_SERVER['REQUEST_METHOD'] == "POST") {
+                //collect Data By Post
+                $name = $_POST['Name'];
+                $description = $_POST['description'];
+                //Validation in my form
+                $formError = array();
+                if(is_numeric($name))
+                {
+                    $formError[0] = "name can't be a start with number";
+                }
+                if(empty($name))
+                {
+                    $formError[1] = "You can't make name is <strong> Empty </strong>";
+                }
+                if(empty($description))
+                {
+                    $formError[2] = "You can't make description is <strong> Empty </strong>";
+                }
+                echo "<div class='container'>";
+                if (empty($formError)) {
+                    $check = CheckItem('Name', 'Categories', $name);
+                    if ($check == 1) {
+                        echo "<div class='container'>";
+                        echo "<div class='alert alert-danger text-center'>" . '<h3>this Name is already exit </h3></div>';
+                        echo "</div>";
+                        header("REFRESH:3 ; URL=category.php?do=add");
+                    } else {
+                        $stmt = $con->prepare("Insert into categories (Name,Description)
+                          values(:zname,:zdescription)");
+                        //excute Data
+                        $stmt->execute(array(
+                            'zname' => $name,
+                            'zdescription' => $description
+                        ));
+
+
+                        //Count the number of rows
+
+                        echo "<div class='container'>";
+                        echo "<div class='alert alert-success text-center'>" . '<h3>1 Record inserted </h3></div>';
+                        echo "</div>";
+                        header("REFRESH:3 ; URL=category.php");
+                    }
+                }
+                else{
+                    include ("categories/index.php");
+                }
+            }
+        }
+         /*
+            =============================================
+            ========Ending Insert Code from $do=edit ====
+            =============================================
+        */
+        /*
+            ============================================
+            ============Delete code ====================
+            ============================================
+        */
+        else if($do='delete')
+        {
+            //check if value userid is define and is numeric
+            $userid = isset($_GET['userid'])&&is_numeric($_GET['userid']) ? intval($_GET['userid']) : 0;
+
+//preparing select Query
+            $stmt = $con->prepare("select * From categories where ID = ? LIMIT 1");
+//excute Query in DB
+            $stmt->execute(array($userid));
+//Count the number of rows
+            $count = $stmt->rowCount();
+//if userid in my DB will appear my form
+            if($count>0)
+            {
+                //this binding method to prevent Sql Injunction
+                $stmt = $con->prepare('DELETE FROM categories WHERE ID = :zuser');
+                //binding method
+                $stmt->bindParam('zuser',$userid);
+                $stmt->execute();
+                echo "<div class='container'>";
+                echo "<div class='alert alert-success text-center'>";
+                echo "<h2>1 Record Deleted</h2></div>";
+                header('REFRESH:5 ; URL=category.php');
+                echo "</div>";
+            }
+            else
+            {
+                $x = "This account is not Exit";
+                RedirectFunc($x,3);
+            }
+        }
+    }
+
+  else
+    {
+        // echo "You Cant Go to this page directly";
+        header('Location:index.php');
+        exit();
+    }
+include $tpl . "footer.php";
+ob_end_flush();
+?>
+        
+   
