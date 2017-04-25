@@ -48,22 +48,33 @@ legend span
 }
 .dropdown-menu
 {
-    min-width: 190px;
     background-color: #00b2ff;
     border: 0px;
+    width: 220px;
 }
 .navbar-inverse .navbar-nav>.open>a, 
 .navbar-inverse .navbar-nav>.open>a:focus, 
 .navbar-inverse .navbar-nav>.open>a:hover
 {
     background-color: #00b2ff;
+    margin-top: -2px;
 }
 .dropdown-menu>li>a
 {
-   background-color: #00b2ff;
+    background-color: #00b2ff;
     color: #FFF;
     padding: 10px;
     font-size: 15px;
+    -webkit-transition: padding 0.8s ease;
+    -moz-transition: padding 0.8s ease;
+    -o-transition: padding 0.8s ease;
+    transition: padding 0.8s ease;
+}
+.dropdown-menu>li>a:hover
+{   
+    color:#FFF;
+    background-color: #00b2ff;
+    padding-left: 35px;
 }
 /*End Navbar*/
 
