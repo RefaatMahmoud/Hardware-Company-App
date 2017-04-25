@@ -110,18 +110,37 @@ font-size: 18px;
     text-align: center;
     color: #FFF;
     background-color: #444;
-    font-size: 25px;
+    font-size: 20px;
+    padding: 0px;
 }
 .main-table td
 {
     text-align: center;
     color: black;
     background-color: #FFF;
-    font-size: 20px;
+    font-size: 16px;
+}
+.table > tbody > tr > td, .table > tbody > tr > th, 
+.table > tfoot > tr > td, .table > tfoot > tr > th, 
+.table > thead > tr > td, .table > thead > tr > th
+{
+    padding: 0px;
+    vertical-align: middle;
+}
+.table-bordered > tbody > tr > td, 
+.table-bordered > tbody > tr > th, 
+.table-bordered > tfoot > tr > td, 
+.table-bordered > tfoot > tr > th, 
+.table-bordered > thead > tr > td, 
+.table-bordered > thead > tr > th
+{
+    border: 3px solid #EAEAEA
 }
 .EditBtn
 {
     margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .ActiveBtn
 {
