@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 24, 2017 at 02:48 PM
+-- Generation Time: Apr 26, 2017 at 03:23 PM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -18,8 +18,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Database: `workshop`
 --
-CREATE DATABASE `workshop` DEFAULT CHARACTER SET utf8 COLLATE utf8_czech_ci;
-USE `workshop`;
 
 -- --------------------------------------------------------
 
@@ -113,6 +111,33 @@ INSERT INTO `items` (`ItemID`, `Name`, `Description`, `Price`, `Add_Date`, `Coun
 (13, 'HP', 'Laptop;Ram:6GB;HD:1Tera;Cori5', '5000', '2017-04-24', 'china', '2', 5, 15),
 (14, 'Apple', 'Laptop;Ram:8GB;HD:1.5Tera;Cori5', '10000', '2017-04-24', 'china', '2', 5, 15),
 (15, 'Toshiba', 'Laptop;Ram:8GB;HD:1Tera;Cori5;AMD:2GB', '7000', '2017-04-24', 'china', '2', 5, 15);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `uploaditems`
+--
+
+CREATE TABLE IF NOT EXISTS `uploaditems` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) CHARACTER SET utf32 NOT NULL,
+  `Model` varchar(255) CHARACTER SET utf32 NOT NULL,
+  `Price` varchar(255) COLLATE utf8_czech_ci NOT NULL,
+  `image` varchar(255) CHARACTER SET utf32 NOT NULL,
+  `status` varchar(255) COLLATE utf8_czech_ci NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `uploaditems`
+--
+
+INSERT INTO `uploaditems` (`ID`, `Name`, `Model`, `Price`, `image`, `status`) VALUES
+(3, 'pc', 'asdf', '123', '32492065_1.PNG', '2'),
+(4, 'laptop mac', '12312', '1200', '97116089_10.jpg', '2'),
+(5, 'pc3', '123dsaf', '12800$', '15237426_8.PNG', '1'),
+(6, 'laptop mac', '12ssasdf', '90012', '80871582_baby-violet-eyes.jpg', '0'),
+(7, 'qwe', 'wqe', '213', '7031250_7.PNG', '3');
 
 --
 -- Constraints for dumped tables
