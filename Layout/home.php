@@ -778,7 +778,27 @@ include "../Admin/connect.php";
                                 <textarea name="message" id="message" class="span3" onFocus="if (this.value == 'Message') this.value = '';" onBlur="if (this.value == '') this.value = 'Message';">Message</textarea>
                                 <div class="clear"></div>
                                 <input type="reset" class="btn-default" value="Cancel!" />
-                                <input type="submit" class="btn-default" value="Send!" />
+                                <input type="submit" class="btn-default" value="Send!" name="save" />
+                                <?php
+                                
+                                
+                                if(isset($_POST['save']))
+                                {
+                                    $name = $_POST['name'];
+                                $email = $_POST['email'];
+                                $message = $_POST['message'];
+                                     $stmt = $con->prepare("Insert into contacts (Name,email,message) values(:name , :email ,:message)");
+                                    
+                                    $stmt->execute(array(
+                                        'name' => $name ,
+                                        'email' => $email,
+                                        'message' => $message 
+    ));    
+                                }
+                                
+                                
+                                ?>
+                                
                                 <div class="clear"></div>
                             </form>
                         </div>

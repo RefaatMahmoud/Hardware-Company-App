@@ -42,6 +42,11 @@
                         <?php echo lang('Logs');?>
                     </a>
                 </li>
+                <li>
+                    <a href="contacts.php">
+                        <?php echo lang('contacts');?>
+                    </a>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">

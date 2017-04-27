@@ -114,6 +114,27 @@ INSERT INTO `items` (`ItemID`, `Name`, `Description`, `Price`, `Add_Date`, `Coun
 
 -- --------------------------------------------------------
 
+
+--
+-- Table structure for table `uploaditems`
+--
+
+CREATE TABLE contacts(
+id INT UNIQUE NOT NULL AUTO_INCREMENT,
+name varchar(50) NOT NULL,
+email varchar(100) NOT NULL,
+message TEXT NOT NULL,
+primary key(id)    
+);
+
+
+
+
+
+
+
+-----------------------------------------------------------
+
 --
 -- Table structure for table `uploaditems`
 --

@@ -8,7 +8,8 @@ function lang($phares)
     "ITEMS"        =>"Items ",
     "Statistics"    =>"Statistics ",
     "Members"      =>"Members ",
-    "Logs"          =>"Logs"
+    "Logs"          =>"Logs",
+    "contacts"      =>"contacts"    
     );
     return $lang[$phares];
 }
