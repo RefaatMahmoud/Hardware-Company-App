@@ -153,16 +153,6 @@ CREATE TABLE IF NOT EXISTS `uploaditems` (
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci AUTO_INCREMENT=8 ;
 
---
--- Dumping data for table `uploaditems`
---
-
-INSERT INTO `uploaditems` (`ID`, `Name`, `Model`, `Price`, `image`, `status`) VALUES
-(3, 'pc', 'asdf', '123', '32492065_1.PNG', '2'),
-(4, 'laptop mac', '12312', '1200', '97116089_10.jpg', '2'),
-(5, 'pc3', '123dsaf', '12800$', '15237426_8.PNG', '1'),
-(6, 'laptop mac', '12ssasdf', '90012', '80871582_baby-violet-eyes.jpg', '0'),
-(7, 'qwe', 'wqe', '213', '7031250_7.PNG', '3');
 
 --
 -- Constraints for dumped tables
