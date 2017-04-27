@@ -14,7 +14,7 @@ include "../Admin/connect.php";
 
         <!-- Style Files -->
         <link href="Css/bootstrap.min.css" rel="stylesheet">
-
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link href="Css/products.css" rel="stylesheet" />
         <link href="Css/index.css" rel="stylesheet" />
         <!-- Scripting Files-->
