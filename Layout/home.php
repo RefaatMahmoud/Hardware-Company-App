@@ -750,35 +750,35 @@ include "../Admin/connect.php";
             <div class="wrap">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-8">
                             <h2 class="title">ABOUT US</h2>
                             <div class="">
                                 <blockquote>
                                     <h1>Welcome to Technoshop</h1>
                                     <ul>
-                                        <li>the Middle East’s online marketplace. We connect people and products – opening up a world of possibility.we give you access to everything you need and want. Our range is unparalleled, and our prices unbeatable. This is Technoshop – the power is in your hands.</li>
+                                        <li><p><i>the Middle East’s online marketplace. We connect people and products – opening up a world of possibility.we give you access to everything you need and want. Our range is unparalleled, and our prices unbeatable. This is Technoshop – the power is in your hands.</i></p></li>
+                                        
                                     </ul>
                                 </blockquote>
 
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <h2 class="title">SPONSERS</h2>
-
-
-                            <img src="Images/logos_brands.jpg" class="img-responsive" />
-
-
-                        </div>
-                        <div class="col-md-3">
+                        
+                        <div class="col-md-4">
                             <h2 class="title">Contact Us</h2>
-                            <form action="#" method="post">
-                                <input class="span3" type="text" name="name" id="name" value="Name" onFocus="if (this.value == 'Name') this.value = '';" onBlur="if (this.value == '') this.value = 'Name';" />
-                                <input class="span3" type="text" name="email" id="email" value="Email" onFocus="if (this.value == 'Email') this.value = '';" onBlur="if (this.value == '') this.value = 'Email';" />
-                                <textarea name="message" id="message" class="span3" onFocus="if (this.value == 'Message') this.value = '';" onBlur="if (this.value == '') this.value = 'Message';">Message</textarea>
+                            <form role="form"action="#" method="post">
+                                <div class="form-group"><input class="form-control" type="text" name="name" id="name" value="Name" onFocus="if (this.value == 'Name') this.value = '';" onBlur="if (this.value == '') this.value = 'Name';" />
+                                </div>
+                               <div class="form-group">
+                                   <input class="form-control" type="text" name="email" id="email" value="Email" onFocus="if (this.value == 'Email') this.value = '';" onBlur="if (this.value == '') this.value = 'Email';" /></div>
+                                   
+                                <textarea name="message" id="message" class="form-control" onFocus="if (this.value == 'Message') this.value = '';" onBlur="if (this.value == '') this.value = 'Message';">Message</textarea>
+                                
                                 <div class="clear"></div>
+                                <br>
                                 <input type="reset" class="btn-default" value="Cancel!" />
                                 <input type="submit" class="btn-default" value="Send!" name="save" />
+                                
                                 <?php
                                 
                                 
@@ -802,26 +802,24 @@ include "../Admin/connect.php";
                                 <div class="clear"></div>
                             </form>
                         </div>
-                        <div class="col-md-3">
-                            <h2 class="title">Get in touch!</h2>
-                            <div class="foot">
-                                <ul class="fr">
-                                    <li class="fa fa-facebook">
-                                        <a href="https://www.facebook.com"> <img src="Images/Social/facebook.png" height="50" width="50" /> </a>
-                                    </li>
-                                    <li class="fa fa-Twitter">
-                                        <a href="https://www.Twitter.com"> <img src="Images/Social/twitter.png" height="50" width="50" /></a>
-                                    </li>
-                                    <li class="fa fa-Instagram">
-                                        <a href="https://www.instagram.com/"> <img src="Images/Social/instagram.png" height="50" width="50" /> </a>
-                                    </li>
-                                </ul>
-
-                            </div>
-                            <!--/.foot-->
                         </div>
-                        <!--/.span3-->
-                    </div>
+                        <div class="row">
+                         <div class="foot">
+                                
+                                        <a href="https://www.facebook.com"> <img src="Images/Social/facebook.png" height="50" width="50" /> </a>
+                                   
+                                    
+                                        <a href="https://www.Twitter.com"> <img src="Images/Social/twitter.png" height="50" width="50" /></a>
+                                    
+                                
+                                        <a href="https://www.instagram.com/"> <img src="Images/Social/instagram.png" height="50" width="50" /> </a>
+                                    
+                        
+                        </div>     
+                      
+                            
+                    <!--/.span3-->
+                    
                     <!--/.row-->
                     <div class="row">
                         <hr class="featurette-divider">
