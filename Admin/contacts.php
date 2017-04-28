@@ -28,22 +28,30 @@ may appear error in header
     <title>Home</title>
 
     <!-- Style Files -->
-    <link href="Css/bootstrap.min.css" rel="stylesheet">
     
-    <link href="Css/products.css" rel="stylesheet" />
-    <link href="Css/index.css" rel="stylesheet" />
-    <!-- Scripting Files-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="JS/jquery-3.1.1.min.js"></script>
-    <script src="JS/jquery.easing.min.js"></script>
-    <script src="JS/bootstrap.min.js"></script>
-     <script src="JS/products.js"></script>
 <style>
-.aaa
-    {
-        background-color: green;
-        color: white
+    aaa {
+    background-color: whitesmoke;
+    font-style: italic;
+    border-bottom-color: aqua;
+    font-family: sans-serif;
+    font-size: 15px;
+}
+    table th {
+    text-align: center;
+}
+    thead{
+        font-size: 30px;
+        background-color: black;
+        color:aliceblue;
+        
     }
+    table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+    
+   
 </style>
 </head>
     <body>
@@ -51,21 +59,24 @@ may appear error in header
     
     
     
+        <div class="table-responsive">
     <div class="container-fluid">
-    <div class="table-responsive">
-        <div class="container-fluid">
         <div class="row">
         <div class="col-md-12">
-  <table class="table table-striped">
-    <thead class="aaa">
-        
+            
+  <table class=" table  table-bordered table table-hover">
+  
+    <thead >
+      
+        <th>ID</th>
         <th>Name</th>
         <th>E-mail</th>
         <th>Message</th>
-            
+           
     </thead>
-      <tbody>
-          <tr>
+       
+      <tbody class="aaa">
+         <tr> 
           <?php
                             //Now I will Get Data from DB when Device is most popular
                             $stmt = $con->prepare('select * from contacts');
@@ -73,8 +84,9 @@ may appear error in header
                             $rows = $stmt->fetchAll();
                             
                             foreach($rows as $row)
-                            {
+                            {   
                             echo"<tr>";
+                            echo"<th>".$row['id']."</th>";    
                             echo"<th>".$row['name']."</th>";
                             echo"<th>".$row['email']."</th>";
                             echo"<th>".$row['message']."</th>";
@@ -82,16 +94,17 @@ may appear error in header
                             }
                             
                             ?>
+     
       </tr>
-      
     </tbody>
   </table>
+        
         </div>
             </div>
 </div>
     </div>
 
-        </div>
+       
 
 </body>
 </html>
