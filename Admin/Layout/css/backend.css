@@ -1,6 +1,5 @@
 /*Start Login Form*/
-body
-{
+body {
     background-color: #EAEAEA;
     font-size: 16px;
 }
@@ -102,6 +101,9 @@ font-size: 18px;
     font-size: 25px;
     color: red;
 }
+.table-bordered > tbody > tr > td, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > td, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > thead > tr > th {
+      border: 3px solid #d0cbcb;
+}
 .show-pass
 {
     position: absolute;
@@ -131,22 +133,11 @@ font-size: 18px;
     background-color: #FFF;
     font-size: 16px;
 }
-.table > tbody > tr > td, .table > tbody > tr > th, 
-.table > tfoot > tr > td, .table > tfoot > tr > th, 
-.table > thead > tr > td, .table > thead > tr > th
-{
-    padding: 0px;
+table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+        padding: 15PX;
     vertical-align: middle;
 }
-.table-bordered > tbody > tr > td, 
-.table-bordered > tbody > tr > th, 
-.table-bordered > tfoot > tr > td, 
-.table-bordered > tfoot > tr > th, 
-.table-bordered > thead > tr > td, 
-.table-bordered > thead > tr > th
-{
-    border: 3px solid #EAEAEA
-}
+
 .EditBtn
 {
     margin-right: 10px;
