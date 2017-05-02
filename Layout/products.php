@@ -1,7 +1,6 @@
+<?php include '../Admin/connect.php';?>
+<?php session_start();  ?>
 <!DOCTYPE html>
-<?php
-include "../Admin/connect.php";
-?>
 <html>
 <head>
     <!-- Meta Files -->
@@ -22,6 +21,7 @@ include "../Admin/connect.php";
     <script src="JS/bootstrap.min.js"></script>
     <script src="JS/index.js"></script>
     <script src="JS/products.js"></script>
+
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
@@ -58,17 +58,28 @@ include "../Admin/connect.php";
                     </li>
                 </ul>
 
-                <!--form class="navbar-form navbar-left">
+                <form class="navbar-form navbar-left">
                   <div class="form-group">
                     <input type="text" class="form-control" placeholder="Search" size="10">
                   </div>
                   <button type="submit" class="btn btn-default">Go</button>
-                </!--form-->
+                </form>
 
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
-                </ul>
+                 <?php
+                    if(isset($_SESSION['user'])){
+                        ?>
+                 <ul class="nav navbar-nav navbar-right">
+                    <li><a href="profile.php" class="page-scroll"><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION["user"]?></a></li>
+                    <li><a href="logout.php" class="page-scroll"><span class="glyphicon glyphicon-log-in"></span>log out</a></li>
+                </ul> 
+                    
+                <?php
+                    }
+                else{?>
+                     <ul class="nav navbar-nav navbar-right">
+                    <li><a href="login_signup.php" class="page-scroll"><span class="glyphicon glyphicon-user"></span>Login/Sign Up</a></li>
+                </ul> 
+               <?php }?>
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -78,50 +89,6 @@ include "../Admin/connect.php";
 
      <!--Cover photo-->
     <img src="Images/Covers/cover.jpg" class="cover" height="550">
-    <!--================================ Carousel====================================== >
-    <div class="container-fluid" style="margin-top: 100px">
-        <section class="row">
-            <div id="img" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#img" data-slide-to="0" class="active"></li>
-                    <li data-target="#img" data-slide-to="1"></li>
-                    <li data-target="#img" data-slide-to="2"></li>
-
-                </ol>
-                <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                        <img src="Images/slideshow/laptopsales.jpg" style="width: 100%; height: 400px" />
-                        <div class="carousel-caption"></div>
-                    </div>
-
-                    <div class="item">
-                        <img src="Images/slideshow/mobilesales.jpg" style="width: 100%; height: 400px" />
-                        <div class="carousel-caption"></div>
-                    </div>
-
-                    <div class="item">
-                        <img src="Images/slideshow/tabletsales.jpg" style="width: 100%; height: 400px" />
-                        <div class="carousel-caption"></div>
-                    </div>
-
-
-                </div>
-
-                <!-- Arrows Navigator >
-                <a class="left carousel-control" href="#img" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#img" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-
-                    </div>
-        </section>
-    </div>
-                <!-- End Arrows Navigator -->
-    <!--End Slideshow-->
     <!--================================ Search ======================================= -->
 
     <div class="container search">
@@ -134,20 +101,20 @@ include "../Admin/connect.php";
                             <div class="dropdown dropdown-lg">
                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
                                 <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                    <form class="form-horizontal" role="form">
+                            <form class="form-horizontal" role="form" action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
                                         <div class="form-group">
                                             <label for="filter">Filter by</label>
-                                            <select class="form-control">
+                                            <select class="form-control" name="choose">
                                                 <option value="0" selected>All Snippets</option>
-                                                <option value="1">Most popular</option>
-                                                <option value="2">On Sale</option>
-                                                <option value="2">Most recent</option>
+                                                <option value="Labtop">Labtops</option>
+                                                <option value="Mobile">Mobiles</option>
+                                                <option value="Computers">Computers</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="contain">Price</label>
                                             <span id="price"></span>
-                                            <input id="slider" type="range" min="0" max="500" step="10" />
+                                            <input id="slider" type="range" min="1000" max="10000" step="100" name="price" />
 
                                         </div>
 
@@ -156,7 +123,7 @@ include "../Admin/connect.php";
                                         <label for="contain">Contains the words</label>
                                         <input class="form-control" type="text" />
                                       </!--div-->
-                                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>Search</button>
                                     </form>
                                 </div>
                             </div>
@@ -175,260 +142,50 @@ include "../Admin/connect.php";
 
         <div class="col-md-8 ">
             <h2 class="p4 section">Products</h2>
+
+
+
             <div class="container">
+
+
                 <!--First product-->
 				<div class="row product">
 				    <!--div class="product-top"-->
 					<div class="col-md-10">
-                        <div class="col-md-3 product-left ">
-                            <div class="product-main simpleCart_shelfItem">
-                                <a href="buy.html" class="mask">
-                                    <img class="img-responsive zoom-img" src="images/images/lab4.png" alt="" /></a>
-                                <div class="product-bottom">
-                                    <div class="row">
-                                        <h3>Dell Laptop</h3>
-                                    </div>
-                                    <p>Model 2012</p>
-                                    <h4><a>
-                                        <img src="images/images/cart-2.png" alt="" class="cart-img"></a><span class=" item_price">4000 LE</span></h4>
-                                </div>
-                                <!--/.product_bottom-->
-                            </div>
-                            <!--/.product-main-->
-                        </div>
-                        <!--/.col-->
-						<!--Second Product-->
-						<div class="col-md-3 product-left ">
-							<div class="product-main simpleCart_shelfItem">
-								<a href="buy.html" class="mask">
-									<img class="img-responsive zoom-img" src="images/images/lab5.png" alt="" /></a>
-								<div class="product-bottom">
-									<div class="row">
-										<h3>Hp Laptop</h3>
-									</div>
-									<p>Model 2014</p>
-									<h4><a>
-										<img src="images/images/cart-2.png" alt="" class="cart-img"></a> <span class=" item_price">5000 LE</span></h4>
-								</div>
-								<!--/.product_bottom-->
-							</div>
-							<!--/.product-main-->
-						</div>
-						<!--/.col-->
-	
-						<!--Third Product -->
-						<div class="col-md-3 product-left ">
-							<div class="product-main simpleCart_shelfItem">
-								<a href="buy.html" class="mask">
-									<img class="img-responsive zoom-img" src="images/images/lab6.png" alt="" /></a>
-								<div class="product-bottom">
-									<h3 class="pro">Apple Laptop</h3>
-									<p class="row">Model 2015</p>
-									<h4><a>
-										<img src="images/images/cart-2.png" alt="" class="cart-img"></a> <span class=" item_price">10000 LE</span></h4>
-								</div>
-								<!--/.product_bottom-->
-							</div>
-							<!--/.product-main-->
-						</div>
-						<!--/.col-->
-	
-						<!--Fourth Product-->
-						<div class="col-md-3 product-left ">
-							<div class="product-main simpleCart_shelfItem">
-								<a href="buy.html" class="mask">
-									<img class="img-responsive zoom-img" src="images/images/lab7.jpg" alt="" /></a>
-								<div class="product-bottom">
-									<div class="row">
-										<h3>Toshiba Laptop</h3>
-									</div>
-									<p>Model 2010</p>
-									<h4><a>
-										<img src="images/images/cart-2.png" alt="" class="cart-img"></a> <span class=" item_price">7000 LE</span></h4>
-								</div>
-								<!--/.product_bottom-->
-							</div>
-							<!--/.product-main-->
-						</div>
-						<!--/.col-->
-						
-					</div>
-					<!--/.col-md-10-->
-
-                </div>
-				<!--/.First product-->
-				<!--/.product-top-->
-
-                <!--Second Product -->
-                <div class="row product">
-                    <div class="col-md-10">
-						<!--First Product-->
-                        <div class="col-md-3 product-left">
-                            <div class="product-main simpleCart_shelfItem">
-                                <a href="buy.html" class="mask">
-                                    <img class="img-responsive zoom-img" src="images/images/lab8.jpg" alt="" /></a>
-                                <div class="product-bottom">
-                                    <div class="row">
-                                        <h3>Acer Laptop</h3>
-                                    </div>
-                                    <p>Model 2011</p>
-                                    <h4><a>
-                                        <img src="images/images/cart-2.png" class="cart-img" alt=""></a> <span class=" item_price">8000 LE</span></h4>
-                                </div>
-                                <!--/.product_bottom-->
-                            </div>
-                            <!--/.product-main-->
-                        </div>
-                        <!--/.col-->
-
-                        <!--Second Product-->
-                        <div class="col-md-3 product-left">
-                            <div class="product-main simpleCart_shelfItem">
-                                <a href="buy.html" class="mask">
-                                    <img class="img-responsive zoom-img" src="images/images/lab9.png" alt="" /></a>
-                                <div class="product-bottom">
-                                    <div class="row">
-                                        <h3>SONY Laptop</h3>
-                                    </div>
-                                    <p>Model 2015</p>
-                                    <h4><a>
-                                        <img src="images/images/cart-2.png" alt="" class="cart-img"></a> <span class=" item_price">9000 LE</span></h4>
-                                </div>
-                                <!--/.product_bottom-->
-                            </div>
-                            <!--/.product-main-->
-                        </div>
-                        <!--/.col-->
-
-                        <!--Third Product-->
-                        <div class="col-md-3 product-left">
-                            <div class="product-main simpleCart_shelfItem">
-                                <a href="buy.html" class="mask">
-                                    <img class="img-responsive zoom-img" src="images/images/lab10.jpg" alt="" /></a>
-                                <div class="product-bottom">
-                                    <div class="row">
-                                        <h3>VIO Laptop</h3>
-                                    </div>
-                                    <p>Model 2014</p>
-                                    <h4><a>
-                                        <img src="images/images/cart-2.png" alt="" class="cart-img"></a> <span class=" item_price">11000</span></h4>
-                                </div>
-                                <!--/.product_bottom-->
-                            </div>
-                            <!--/.product-main-->
-                        </div>
-                        <!--/.col-->
-
-                        <!--Fourth Product-->
-                        <div class="col-md-3 product-left">
-                            <div class="product-main simpleCart_shelfItem">
-                                <a href="buy.html" class="mask">
-                                    <img class="img-responsive zoom-img" src="images/images/lab11.png" alt="" /></a>
-                                <div class="product-bottom">
-                                    <div class="row">
-                                        <h3>Lenovo laptop</h3>
-                                    </div>
-                                    <p>Explore now</p>
-                                    <h4><a>
-                                        <img src="images/images/cart-2.png" alt="" class="cart-img"></a> <span class=" item_price">12000 LE</span></h4>
-                                </div>
-                                <!--/.product_bottom-->
-                            </div>
-                            <!--/.product-main-->
-                        </div>
-                        <!--/.col-->
+                        
+    <?php
+        if($_SERVER['REQUEST_METHOD']=='POST')
+            {
+               $your_choose = $_POST['choose'];
+               $price = $_POST['price'];
+               $stmt = $con->prepare('select * from items where Price <='.$price);
+               $stmt->execute();
+               $rows = $stmt->fetchAll();
+                foreach($rows as $row)
+                {
+                echo '<div class="col-md-3 product-left ">';
+                echo '<div class="product-main simpleCart_shelfItem">';
+                echo '<a href="buy.html" class="mask">';
+                echo "'<img class='img-responsive zoom-img' src='../Admin/Layout/images/".$row['image']."' /></a>";
+                echo '<div class="product-bottom">';
+                echo '<div class="row">';
+                echo '<h3>'.$row['Name'].'</h3>';
+                echo '</div>';
+                echo '<h4><a>';
+                echo '<img src="images/images/cart-2.png" alt="" class="cart-img"></a>';
+                echo '<span class="item_price">'.$row['Price'].'</span></h4>"';
+                echo  "</div>";
+                echo "</div>";
+                echo "</div>";                    
+                }
+            }
+            ?>
                     </div>
                     <!--/.col-md-10-->
                 </div>
-                <!--/.Second product-->
-                <!--nav aria-label="..." style="margin-left:400px">
-                  <ul class="pagination">
-                    <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                    <li ><a href="#">1 <span class="sr-only"></span></a></li>
-                    <li ><a href="#">2<span class="sr-only"></span></a></li>
-                    <li ><a href="#">3 <span class="sr-only"></span></a></li>
-                    ...
-                  </ul>
-                </!--nav-->
 
             </div>
-            <!--/.container-->
-
-
         </div>
-        <!--col-md-8-->
-
-        <!--Right side menu -->
-        <!--div class="col-md-2">
-            <!--div id="mySidenav" class="sidenav">
-				<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br/>
-				
-					<a href="#" onclick="hidelist()">LAPTOPS</a>
-						<ul style="display:none;" id="list">
-							<li><a href="#">DELL</a>
-							<li><a href="#">HP</a>
-							<li><a href="#">Apple</a>
-							<li><a href="#">Toshiba</a>
-							<li><a href="#">ACER</a>
-							<li><a href="#">SONY</a>
-							<li><a href="#">VIO</a>
-							<li><a href="#">Lenovo</a>
-						</ul>
-					
-					<a href="#" onclick="hidelist()">TABLETS</a>
-						<ul style="display:none;" id="Ul1">
-							<li><a href="#">DELL</a>
-							<li><a href="#">HP</a>
-							<li><a href="#">Apple</a>
-							<li><a href="#">Toshiba</a>
-							<li><a href="#">ACER</a>
-							<li><a href="#">SONY</a>
-							<li><a href="#">VIO</a>
-							<li><a href="#">Lenovo</a>
-						</ul>
-					
-					<a href="#" onclick="hidelist()">MOBILE PHONES</a>
-						<ul style="display:none;" id="Ul2">
-							<li><a href="#">Samsung</a>
-							<li><a href="#">Nokia</a>
-							<li><a href="#">Iphone</a>
-							<li><a href="#">Huwei</a>
-							<li><a href="#">HTC</a>
-							<li><a href="#">SONY</a>
-							<li><a href="#">OPPO</a>
-							<li><a href="#">Lenovo</a>
-						</ul>
-					
-				
-                </!--div>
-            <!--/.sidenav-->
-
-            <!--Right side menu -->
-               <div class="col-md-2">
-               <div id="mysidenav" class="sidenav">
-                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                <a href="#">LAPTOPS</a>
-                <a href="#">TABLETS</a>
-                <a href="#">MOBILE PHONES</a>
-            </div>
-            <!--/.sidenav-->
-
-            <!--LEFT ARROW -->
-            <div class="relative">
-                <div class="arrow">
-                    <a class="btn btn-default btn-lg arrow" aria-label="Left Align">
-                        <span class="glyphicon glyphicon-menu-left" onclick="openNav()" aria-hidden="true"></span>
-                       
-                    </a>
-                </div>
-            </div>
-            
-        </div>
-        
-            </!--div>
-        <!-- /.col-md-2 -->
-
     </div>
     <!--/.container-->
 
@@ -503,71 +260,96 @@ include "../Admin/connect.php";
     </div><!--/.modal-->
 
         <!--===========================footer start=================================-->
-  <div id="footer">
-    <div class="wrap">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-3">
-            <h2 class="title">ABOUT US</h2>
-            <div class="">
-                <blockquote><h1>Welcome to Technoshop</h1>
-                  <ul><li>the Middle East’s online marketplace. 
+ 		<div id="footer">
+			<div class="wrap">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8">
+							<h2 class="title">ABOUT US</h2>
+							<div class="">
+								<blockquote>
+									<h1>Welcome to Technoshop</h1>
+									<ul>
+										<li>
+											<p><i>the Middle East’s online marketplace. We connect people and products – opening up a world of possibility.we give you access to everything you need and want. Our range is unparalleled, and our prices unbeatable. This is Technoshop – the power is in your hands.</i></p>
+										</li>
 
-                We connect people and products – opening up a world of possibility.we give you access to everything you need and want. Our range is unparalleled, and our prices unbeatable.                  
-                This is Technoshop – the power is in your hands.</li></ul>
-                </blockquote>
-                 
-            </div>
-          </div>
-          <div class="col-md-3">
-            <h2 class="title">SPONSERS</h2>
-          
-              
-          <img src="Images/logos_brands.jpg" class="img-responsive" />
-              
-            
-           </div>
-           <div class="col-md-3">
-             <h2 class="title">Contact Us</h2>
-             <form action="#" method="post">
-                <input class="span3" type="text" name="name" id="name" value="Name" onFocus="if (this.value == 'Name') this.value = '';" onBlur="if (this.value == '') this.value = 'Name';" />
-                <input class="span3" type="text" name="email" id="email" value="Email" onFocus="if (this.value == 'Email') this.value = '';" onBlur="if (this.value == '') this.value = 'Email';" />
-                <textarea name="message" id="message" class="span3" onFocus="if (this.value == 'Message') this.value = '';" onBlur="if (this.value == '') this.value = 'Message';" >Message</textarea>
-                <div class="clear"></div>
-                <input type="reset" class="btn-default" value="Cancel!" />
-                <input type="submit" class="btn-default" value="Send!" />
-                <div class="clear"></div>
-              </form>
-            </div>
-            <div class="col-md-3">
-              <h2 class="title">Get in touch!</h2>
-              <div class="foot">
-                  <ul class="fr">
-                    <li class="fa fa-facebook">
-                      <a href="https://www.facebook.com">   <img src="Images/Social/facebook.png" height="50" width="50"/> </a>
-                    </li>
-                    <li class="fa fa-Twitter">
-                      <a href="https://www.Twitter.com">    <img src="Images/Social/twitter.png" height="50" width="50"/></a>
-                    </li>
-                    <li class="fa fa-Instagram">
-                      <a href="https://www.instagram.com/"> <img src="Images/Social/instagram.png" height="50" width="50"/> </a>
-                    </li>
-                    </ul>
+									</ul>
+								</blockquote>
 
-               </div>   <!--/.foot-->
-            </div>     <!--/.span3-->
-        </div>       <!--/.row-->
-        <div class="row">
-          <hr class="featurette-divider">
-          <div class="clear_fix"></div>
-          <div class="top">&#94;</div>
-          <script src="js/scrolling-nav.js"></script>
-        </div>
-      </div>       <!--/.container -->
-    </div>       <!--/.wrap-->
-      </div>
+							</div>
+						</div>
 
-    <script src="JS/index.js"></script>
+						<div class="col-md-4">
+							<h2 class="title">Contact Us</h2>
+							<form role="form" action="#" method="post">
+								<div class="form-group"><input class="form-control" type="text" name="name" id="name" value="Name" onFocus="if (this.value == 'Name') this.value = '';" onBlur="if (this.value == '') this.value = 'Name';" />
+								</div>
+								<div class="form-group">
+									<input class="form-control" type="text" name="email" id="email" value="Email" onFocus="if (this.value == 'Email') this.value = '';" onBlur="if (this.value == '') this.value = 'Email';" /></div>
+
+								<textarea name="message" id="message" class="form-control" onFocus="if (this.value == 'Message') this.value = '';" onBlur="if (this.value == '') this.value = 'Message';">Message</textarea>
+
+								<div class="clear"></div>
+								<br>
+								<input type="reset" class="btn-default" value="Cancel!" />
+								<input type="submit" class="btn-default" value="Send!" name="save" />
+
+								<?php
+                                
+                                
+                                if(isset($_POST['save']))
+                                {
+                                    $name = $_POST['name'];
+                                $email = $_POST['email'];
+                                $message = $_POST['message'];
+                                     $stmt = $con->prepare("Insert into contacts (Name,email,message) values(:name , :email ,:message)");
+                                    
+                                    $stmt->execute(array(
+                                        'name' => $name ,
+                                        'email' => $email,
+                                        'message' => $message 
+    ));    
+                                }
+                                
+                                
+                                ?>
+
+									<div class="clear"></div>
+							</form>
+						</div>
+					</div>
+					<div class="row">
+						<div class="foot">
+
+							<a href="https://www.facebook.com"> <img src="Images/Social/facebook.png" height="50" width="50" /> </a>
+
+
+							<a href="https://www.Twitter.com"> <img src="Images/Social/twitter.png" height="50" width="50" /></a>
+
+
+							<a href="https://www.instagram.com/"> <img src="Images/Social/instagram.png" height="50" width="50" /> </a>
+
+
+						</div>
+
+
+						<!--/.span3-->
+
+						<!--/.row-->
+						<div class="row">
+							<hr class="featurette-divider">
+							<div class="clear_fix"></div>
+							<div class="top">&#94;</div>
+							<script src="js/scrolling-nav.js"></script>
+						</div>
+					</div>
+					<!--/.container -->
+				</div>
+				<!--/.wrap-->
+			</div>
+
+			<script src="JS/index.js"></script>
 
 <!--=========================== footer end==========================-->
 
