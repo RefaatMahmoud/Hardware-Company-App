@@ -28,7 +28,7 @@ may appear error in header
                         <i class="fa fa-group"></i>
                         <div class="info">
                         Pend Members
-                            <span>0</span>
+                            <span><?php echo CountItems('ID','useraccount') ?></span>
                         </div>
                     </div>
                 </div>
