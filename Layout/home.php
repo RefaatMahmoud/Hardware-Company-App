@@ -1,30 +1,29 @@
-<?php
+ <?php
 include "../Admin/connect.php";
 session_start();
-if($_SERVER['REQUEST_METHOD'] == "POST"){ 
-    $name       = $_POST['name'];
+    if($_SERVER['REQUEST_METHOD'] == "POST"){ 
+     if(!isset($_SESSION['user'])){
+        header('Location:login_signup.php');
+    }else{
+    $namecard       = $_POST['namecard'];
     $cardNo     = $_POST['cardNo'];
-    $cvc        = $_POST['cvc'];
-    $month      = $_POST['month'];
-    $year       = $_POST['year'];
+    $phone        = $_POST['phone'];
+    $address      = $_POST['address'];
+    $name       = $_POST['name'];
+    $price       = $_POST['price']; 
     $hashCardNo = sha1($cardNo);
-    $hashcvc    = sha1($cvc);
     
-    $stmt = $con->prepare("INSERT INTO buy (
-                        name ,
-                        cardnumber ,
-                        cvc ,
-                        month ,
-                        Year)
-                        VALUES (:sname,:scard,:scvc,:smonth,:syear)");
-    $stmt->execute(array(
-        'sname' =>$name,
-        'scard' =>$hashCardNo,
-        'scvc'  =>$hashcvc,
-        'smonth'=>$month,
-        'syear' =>$year));
-    header('Location:home.php');
-}else{
+    $stmt = $con->prepare("INSERT INTO buy (namecard ,cardnumber ,phone ,address ,name,price)
+                           VALUES (?,?,?,?,?,?)");
+    $stmt->execute(array($namecard,$hashCardNo,$phone,$address,$name,$price));
+    $stmt = $con->prepare('DELETE FROM items WHERE name = ? AND price =? LIMIT 1');
+    $stmt->execute(array($name,$price));
+    $stmt = $con->prepare('DELETE FROM uploaditems WHERE name = ? AND price =? LIMIT 1');
+    $stmt->execute(array($name,$price));
+    header('Location:products.php');
+}
+    }
+else{
     echo "";
 }
 
@@ -41,10 +40,12 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 		<title>Home</title>
 
 		<!-- Style Files -->
-		<link href="Css/bootstrap.min.css" rel="stylesheet">
-      <link rel ="stylesheet" href="CSS/slider.css">
-		<link href="Css/products.css" rel="stylesheet" />
-		<link href="Css/index.css" rel="stylesheet" />
+        <link href="CSS/font-awesome.min" rel="stylesheet">
+		<link href="CSS/bootstrap.min.css" rel="stylesheet">
+        <link rel ="stylesheet" href="CSS/slider.css">
+		<link href="CSS/products.css" rel="stylesheet" />
+		<link href="CSS/index.css" rel="stylesheet" />
+        <link href="CSS/font-awesome.min.css" rel="stylesheet">
 		<!-- Scripting Files-->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script src="JS/jquery-3.1.1.min.js"></script>
@@ -298,7 +299,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
 			<div class="product">
 				<div class="container">
-					<h1 class="section">MOST POPULER</h1>
+					<h1 class="section">ON Sale </h1>
 					<hr class="featurette-divider">
 					<!--LEFT ARROW -->
 					<div class="col-md-1 product-left">
@@ -363,7 +364,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 				<!--=================================NEW PRODUCTS===============================-->
 				<div class="product">
 					<div class="container">
-						<h1 class="section">MOST POPULER</h1>
+						<h1 class="section">New Products</h1>
 						<hr class="featurette-divider">
 						<!--LEFT ARROW -->
 						<div class="col-md-1 product-left">
@@ -541,16 +542,16 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
 
 						<form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST" name="buyForm">
-							<input type="hidden" class="price" value="" >
-							<input type="" class="label" value="" style="display : block; color : black !important ;">
+							<input type="hidden" class="price" value="" name="price" >
+							<input type="hidden" class="label" value="" style="display : block; color : black !important ;" name="name">
 						
 							<div class='form-row'>
 								<div class='col-xs-12 form-group required'>
 									<label class='control-label'>Name on Card</label>
-									<select class='form-control'>
-                                    <option>Payoneer</option>
-                                    <option>Paypal</option>
-                                    <option>Skrill</option>
+									<select class='form-control' name="namecard">
+                                    <option value="Payoneer">Payoneer</option>
+                                    <option value="Paypal">Paypal</option>
+                                    <option value="Skrill">Skrill</option>
                                 </select>
 								</div>
 							</div>
@@ -563,20 +564,20 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 							<div class='form-row'>
 								<div class='col-xs-12 form-group card required'>
 									<label class='control-label'>Enter Your Phone</label>
-									<input autocomplete='off' class='form-control card-number' type='phone' name='cardNo'>
+									<input autocomplete='off' class='form-control card-number' type='phone' name='phone'>
 								</div>
 							</div>
 							<div class='form-row'>
 								<div class='col-xs-12 form-group card required'>
 									<label class='control-label'>Enter Your Address</label>
-									<input autocomplete='off' class='form-control card-number' type='text' name='cardNo'>
+									<input autocomplete='off' class='form-control card-number' type='text' name='address'>
 								</div>
 							</div>
 							<div class='form-row'>
 								<div class='col-md-12'>
 									<div class='text-center total'>
 										Total:
-										<span class='amount'>$300</span>
+										<span class='Price'></span>
 									</div>
 								</div>
 							</div>
@@ -594,9 +595,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
 					</div>
 					<!--/.modal-body-->
-					<div class="modal-header">
-
-					</div>
+					
 				</div>
 				<!--/.modal-content-->
 			</div>
@@ -670,15 +669,20 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 					</div>
 					<div class="row">
 						<div class="foot">
+                                                            
+                            
+                            <a href="https://www.instagram.com/"> <img src="Images/Social/F.png" height="50" width="50" /> </a>
+                            
+                            <a href="https://www.instagram.com/"> <img src="Images/Social/T.png" height="50" width="50" /> </a>
+                            
+                            
+							<a href="https://www.facebook.com"> <img src="Images/Social/email.png" height="50" width="50" /> </a>
 
-							<a href="https://www.facebook.com"> <img src="Images/Social/facebook.png" height="50" width="50" /> </a>
+
+							<a href="https://www.Twitter.com"> <img src="Images/Social/gplus.png" height="50" width="50" /></a>
 
 
-							<a href="https://www.Twitter.com"> <img src="Images/Social/twitter.png" height="50" width="50" /></a>
-
-
-							<a href="https://www.instagram.com/"> <img src="Images/Social/instagram.png" height="50" width="50" /> </a>
-
+							<a href="https://www.instagram.com/"> <img src="Images/Social/rss.png" height="50" width="50" /> </a>
 
 						</div>
 

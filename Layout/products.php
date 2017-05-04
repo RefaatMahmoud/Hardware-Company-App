@@ -1,5 +1,7 @@
-<?php include '../Admin/connect.php';?>
-<?php session_start();  ?>
+<?php 
+include "../Admin/connect.php";
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,20 +9,23 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home</title>
+    <title>Product</title>
 
     <!-- Style Files -->
-    <link href="Css/bootstrap.min.css" rel="stylesheet">
-    <link href="Css/index.css" rel="stylesheet" />
-    <link href="Css/products.css" rel="stylesheet" />
-
+    <link href="CSS/font-awesome.min" rel="stylesheet">
+    <link href="CSS/bootstrap.min.css" rel="stylesheet">
+    <link rel ="stylesheet" href="CSS/slider.css">
+    <link href="CSS/products.css" rel="stylesheet" />
+    <link href="CSS/index.css" rel="stylesheet" />
+    <link href="CSS/font-awesome.min.css" rel="stylesheet">
     <!-- Scripting Files-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="JS/jquery-3.1.1.min.js"></script>
     <script src="JS/jquery.easing.min.js"></script>
     <script src="JS/bootstrap.min.js"></script>
-    <script src="JS/index.js"></script>
     <script src="JS/products.js"></script>
+    <script src="JS/buyform.js" async></script>
+    <script src="JS/slider.js" async></script>
 
 </head>
 
@@ -88,7 +93,61 @@
     <!--/.navigation bar -->
 
      <!--Cover photo-->
-    <img src="Images/Covers/cover.jpg" class="cover" height="550">
+<!--    <img src="Images/Covers/cover.jpg" class="cover" height="550">-->
+<div class="slider-container">
+		<div class="slider">
+			<!--slide one-->
+			<div class="slide hide">
+				<img src="Images/slider/1.jpg" alt="">
+				<div class="description">
+					<h2></h2>
+					<p></p>
+				</div>
+			</div>
+			<!--slide Two-->
+			<div class="slide hide">
+				<img src="Images/slider/2.jpg" alt="">
+				<div class="description">
+					<h2></h2>
+					<p></p>
+				</div>
+			</div>
+			<!--slide Three-->
+			<div class="slide hide">
+				<img src="Images/slider/3.jpg" alt="">
+				<div class="description">
+					<h2></h2>
+					<p></p>
+				</div>
+			</div>
+			<!--slide Four-->
+			<div class="slide
+				 hide">
+				<img src="Images/slider/4.jpg" alt="">
+				<div class="description">
+					<h2></h2>
+					<p></p>
+				</div>
+			</div>
+			<!--slide Five-->
+			<div class="slide hide">
+				<img src="Images/slider/5.jpg" alt="">
+				<div class="description">
+					<h2>slide five</h2>
+
+					<p>hello my name is hazem tarek hemaily , i'm a student in the faculty of computers and infomatics at suez canal university
+					</p>
+				</div>
+			</div>
+			<div class="dots">
+				<a class=""></a>
+				<a></a>
+				<a></a>
+				<a></a>
+				<a></a>
+			</div>
+		</div>
+	</div>
     <!--================================ Search ======================================= -->
 
     <div class="container search">
@@ -114,7 +173,7 @@
                                         <div class="form-group">
                                             <label for="contain">Price</label>
                                             <span id="price"></span>
-                                            <input id="slider" type="range" min="1000" max="10000" step="100" name="price" />
+                                            <input id="slider" type="range" min="1000" max="20000" step="100" name="price" />
 
                                         </div>
 
@@ -123,7 +182,7 @@
                                         <label for="contain">Contains the words</label>
                                         <input class="form-control" type="text" />
                                       </!--div-->
-                                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>Search</button>
+                                        <button type="submit" class="btn btn-primary" name="search-form"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>Search</button>
                                     </form>
                                 </div>
                             </div>
@@ -154,9 +213,32 @@
 					<div class="col-md-10">
                         
     <?php
-        if($_SERVER['REQUEST_METHOD']=='POST')
-            {
-               $your_choose = $_POST['choose'];
+      if($_SERVER['REQUEST_METHOD'] == "POST"  && isset($_POST['buyForm'])){
+     if(!isset($_SESSION['user'])){
+        header('Location:login_signup.php');
+    }
+          else{
+    $namecard       = $_POST['namecard'];
+    $cardNo     = $_POST['cardNo'];
+    $phone        = $_POST['phone'];
+    $address      = $_POST['address'];
+    $name       = $_POST['name'];
+    $price       = $_POST['price']; 
+    $hashCardNo = sha1($cardNo);
+    
+    $stmt = $con->prepare("INSERT INTO buy (namecard ,cardnumber ,phone ,address ,name,price)
+                           VALUES (?,?,?,?,?,?)");
+    $stmt->execute(array($namecard,$hashCardNo,$phone,$address,$name,$price));
+    $stmt = $con->prepare('DELETE FROM items WHERE name = ? AND price =? LIMIT 1');
+    $stmt->execute(array($name,$price));
+    $stmt = $con->prepare('DELETE FROM uploaditems WHERE name = ? AND price =? LIMIT 1');
+    $stmt->execute(array($name,$price));
+}
+      }
+                        
+                        
+            if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['search-form'])){
+            $your_choose = $_POST['choose'];
                $price = $_POST['price'];
                $stmt = $con->prepare('select * from items where Price <='.$price);
                $stmt->execute();
@@ -173,12 +255,14 @@
                 echo '</div>';
                 echo '<h4><a>';
                 echo '<img src="images/images/cart-2.png" alt="" class="cart-img"></a>';
-                echo '<span class="item_price">'.$row['Price'].'</span></h4>"';
+                echo '<span class="item_price">'.$row['Price'].'</span></h4>';
                 echo  "</div>";
                 echo "</div>";
                 echo "</div>";                    
-                }
-            }
+                }}
+
+else{
+    echo "";}
             ?>
                     </div>
                     <!--/.col-md-10-->
@@ -191,73 +275,74 @@
 
     <div id="myModal" class="modal">
 
-        <!-- Modal content -->
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close">&times;</span>
-                <h2>BUY FORM</h2>
-            </div>
-            <div class="modal-body">
+				<!-- Modal content -->
+				<div class="modal-content">
+					<div class="modal-header">
+						<span class="close">&times;</span>
+						<h2>BUY FORM</h2>
+					</div>
+					<div class="modal-body">
 
-            <form accept-charset="UTF-8" action="/" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="pk_bQQaTxnaZlzv4FnnuZ28LFHccVSaj" id="payment-form" method="post">
-                <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓" />
-                    <input name="_method" type="hidden" value="PUT" />
-                    <input name="authenticity_token" type="hidden" value="qLZ9cScer7ZxqulsUWazw4x3cSEzv899SP/7ThPCOV8=" /></div>
-            <div class='form-row'>
-              <div class='col-xs-12 form-group required'>
-                <label class='control-label'>Name on Card</label>
-                <input class='form-control' size='4' type='text'>
-              </div>
-            </div>
-            <div class='form-row'>
-              <div class='col-xs-12 form-group card required'>
-                <label class='control-label'>Card Number</label>
-                <input autocomplete='off' class='form-control card-number' size='20' type='text'>
-              </div>
-            </div>
-            <div class='form-row'>
-              <div class='col-xs-4 form-group cvc required'>
-                <label class='control-label'>CVC</label>
-                <input autocomplete='off' class='form-control card-cvc' placeholder='ex. 311' size='4' type='text'>
-              </div>
-              <div class='col-xs-4 form-group expiration required'>
-                <label class='control-label'>Expiration</label>
-                <input class='form-control card-expiry-month' placeholder='MM' size='2' type='text'>
-              </div>
-              <div class='col-xs-4 form-group expiration required'>
-                <label class='control-label'> </label>
-                <input class='form-control card-expiry-year' placeholder='YYYY' size='4' type='text'>
-              </div>
-            </div>
-            <div class='form-row'>
-              <div class='col-md-12'>
-                <div class='text-center total'>
-                  Total:
-                  <span class='amount'>$300</span>
-                </div>
-              </div>
-            </div>
-            
-			<button class=' btn btn-primary submit-button' type='submit'>Pay >></button>
-			
-			<div class='form-row'>
-              <div class='col-md-12 error form-group hide'>
-                <div class='alert-danger alert'>
-                  Please correct the errors and try again.
-                </div>
-              </div>
-            </div>
-          </form>
 
-            </div>
-            <!--/.modal-body-->
-            <div class="modal-header">
+						<form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
+							<input type="hidden" class="price" value="" name="price" >
+							<input type="hidden" class="label" value="" style="display : block; color : black !important ;" name="name">
+						
+							<div class='form-row'>
+								<div class='col-xs-12 form-group required'>
+									<label class='control-label'>Name on Card</label>
+									<select class='form-control' name="namecard">
+                                    <option value="Payoneer">Payoneer</option>
+                                    <option value="Paypal">Paypal</option>
+                                    <option value="Skrill">Skrill</option>
+                                </select>
+								</div>
+							</div>
+							<div class='form-row'>
+								<div class='col-xs-12 form-group card required'>
+									<label class='control-label'>Card Number</label>
+									<input autocomplete='off' class='form-control card-number' size='20' type='text' name='cardNo'>
+								</div>
+							</div>
+							<div class='form-row'>
+								<div class='col-xs-12 form-group card required'>
+									<label class='control-label'>Enter Your Phone</label>
+									<input autocomplete='off' class='form-control card-number' type='phone' name='phone'>
+								</div>
+							</div>
+							<div class='form-row'>
+								<div class='col-xs-12 form-group card required'>
+									<label class='control-label'>Enter Your Address</label>
+									<input autocomplete='off' class='form-control card-number' type='text' name='address'>
+								</div>
+							</div>
+							<div class='form-row'>
+								<div class='col-md-12'>
+									<div class='text-center total'>
+										Total:
+										<span class='Price'></span>
+									</div>
+								</div>
+							</div>
 
-            </div>
-        </div>
-        <!--/.modal-content-->
+							<input class=' btn btn-primary submit-button' type='submit' name="buyForm" value='Pay'>
 
-    </div><!--/.modal-->
+							<div class='form-row'>
+								<div class='col-md-12 error form-group hide'>
+									<div class='alert-danger alert'>
+										Please correct the errors and try again.
+									</div>
+								</div>
+							</div>
+						</form>
+
+					</div>
+					<!--/.modal-body-->
+					
+				</div>
+				<!--/.modal-content-->
+			</div><!--/.modal-->
+
 
         <!--===========================footer start=================================-->
  		<div id="footer">
@@ -321,14 +406,19 @@
 					</div>
 					<div class="row">
 						<div class="foot">
+                            
+                            <a href="https://www.instagram.com/"> <img src="Images/Social/F.png" height="50" width="50" /> </a>
+                            
+                            <a href="https://www.instagram.com/"> <img src="Images/Social/T.png" height="50" width="50" /> </a>
+                            
+                            
+							<a href="https://www.facebook.com"> <img src="Images/Social/email.png" height="50" width="50" /> </a>
 
-							<a href="https://www.facebook.com"> <img src="Images/Social/facebook.png" height="50" width="50" /> </a>
+
+							<a href="https://www.Twitter.com"> <img src="Images/Social/gplus.png" height="50" width="50" /></a>
 
 
-							<a href="https://www.Twitter.com"> <img src="Images/Social/twitter.png" height="50" width="50" /></a>
-
-
-							<a href="https://www.instagram.com/"> <img src="Images/Social/instagram.png" height="50" width="50" /> </a>
+							<a href="https://www.instagram.com/"> <img src="Images/Social/rss.png" height="50" width="50" /> </a>
 
 
 						</div>
