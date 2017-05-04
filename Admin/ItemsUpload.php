@@ -37,14 +37,14 @@ $title = 'Items';
             </div>
             <!--End Price of Item -->
             
-            <!--Start Country_made of Item -->
+            <!--Start Photo of Item -->
             <div class="form-group">
                 <label class="control-label col-sm-2 col-md-3">Photo</label>
                 <div class="col-sm-10 col-md-6">
                     <input type="file" class="form-control" name="file" required="required">
                 </div>
             </div>
-            <!--End Country_made of Item -->
+            <!--End photo of Item -->
             
                <!--Start Status of Item -->
             <div class="form-group">
@@ -88,11 +88,11 @@ if($_SERVER['REQUEST_METHOD']=="POST")
     $formError = array();
     echo "<div class='container'>";
     echo "<div class='row text-center'>";
-    if(is_numeric($name))
+    if(!is_numeric($price))
     {
-      $formError[] = "Name can't be a start with number";
+        $formError[] = "Price Not a number";
     }
-      if(empty($status) || $status==0)
+    if(empty($status) || $status==0)
      {
          $formError [] = 'cant make status empty';
      }
@@ -136,6 +136,6 @@ if($_SERVER['REQUEST_METHOD']=="POST")
         }
     }
         
-include $tpl . "footer.php";
+include ($tpl . "footer.php");
 ob_end_flush();
 ?>
