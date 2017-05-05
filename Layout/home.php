@@ -53,6 +53,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 		<script src="JS/products.js"></script>
 		<script src="JS/buyform.js" async></script>
 		<script src="JS/slider.js" async></script>
+        <script src="JS/info.js" async></script>
 	</head>
 
 
@@ -244,6 +245,27 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 					<div class="col-md-10">
 						<div class="product-top">
 							<div class="product-one">
+
+
+
+                                <div class="col-md-3 product-left ">
+
+                                    <div class="product-main simpleCart_shelfItem">
+
+                                        <a class="mask">
+                                            <img class="img-responsive zoom-img " id="info" src="images/images/lab4.jpg" alt="" />
+                                        </a>
+
+                                        <div class="product-bottom">
+                                            <div class="row">
+                                                <h3>Dell Laptop</h3>
+                                            </div>
+                                            <p>Model 2012</p>
+                                            <h4><a>
+                                                    <img src="Images/pop.png" class="pop" height="70"/> <img src="images/images/cart-2.png" alt="" class="cart-img"></a><span class=" item_price">4000 LE</span></h4>
+                                        </div>
+                                        <!--/.product_bottom-->
+
 
 								<?php
                             //Now I will Get Data from DB when Device is most popular
