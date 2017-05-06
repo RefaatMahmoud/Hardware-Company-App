@@ -5,14 +5,34 @@ session_start();
      if(!isset($_SESSION['user'])){
         header('Location:login_signup.php');
     }else{
+    $formErrors = array();
     $namecard       = $_POST['namecard'];
-    $cardNo     = $_POST['cardNo'];
-    $phone        = $_POST['phone'];
-    $address      = $_POST['address'];
+    for($i=0;$i<strlen($_POST['cardno']);$i++){
+        if(isset($_POST['cardno'])){
+            $cardNo     = $_POST['cardNo'];
+            if(is_numeric($cardNo)==false){
+                $formErrors[]= "Card Number must be Numeric!";
+            }
+        }
+    }
+    for($i=0;$i<strlen($_POST['phone']);$i++){
+        if(isset($_POST['phone'])){
+            $phone     = $_POST['phone'];
+            if(is_numeric($phone)==false){
+                $formErrors[]= "Phone must be Numeric!";
+            }
+        }
+    }
+    if(isset($_POST['address'])){
+        $address     = $_POST['address'];
+        if(is_numeric($address)){
+            $formErrors[]= "Address can't be Numeric!";
+        }
+    }
     $name       = $_POST['name'];
     $price       = $_POST['price']; 
     $hashCardNo = sha1($cardNo);
-    
+    if(empty($formErrors)){   
     $stmt = $con->prepare("INSERT INTO buy (namecard ,cardnumber ,phone ,address ,name,price)
                            VALUES (?,?,?,?,?,?)");
     $stmt->execute(array($namecard,$hashCardNo,$phone,$address,$name,$price));
@@ -21,11 +41,16 @@ session_start();
     $stmt = $con->prepare('DELETE FROM uploaditems WHERE name = ? AND price =? LIMIT 1');
     $stmt->execute(array($name,$price));
     header('Location:products.php');
-}
+    }else{
+                echo "<div class='container'>";
+                echo "<div class='alert alert-danger text-center'>" . '<h3>You can not Buy by these Data<br> please Enter correct Data </h3></div>';
+                echo "</div>";
+            }
+     }
     }
-else{
-    echo "";
-}
+    else{
+        echo "";
+    }
 
 ?>
 	<!DOCTYPE html>
@@ -558,13 +583,13 @@ else{
 							<div class='form-row'>
 								<div class='col-xs-12 form-group card required'>
 									<label class='control-label'>Card Number</label>
-									<input autocomplete='off' class='form-control card-number' size='20' type='text' name='cardNo'>
+									<input autocomplete='off' class='form-control card-number' size='20' type='text' name='cardNo' minlength='11' maxlength="11">
 								</div>
 							</div>
 							<div class='form-row'>
 								<div class='col-xs-12 form-group card required'>
 									<label class='control-label'>Enter Your Phone</label>
-									<input autocomplete='off' class='form-control card-number' type='phone' name='phone'>
+									<input autocomplete='off' class='form-control card-number' maxlength="11" minlength='11' type='phone' name='phone'>
 								</div>
 							</div>
 							<div class='form-row'>
@@ -669,20 +694,15 @@ else{
 					</div>
 					<div class="row">
 						<div class="foot">
-                                                            
-                            
-                            <a href="https://www.instagram.com/"> <img src="Images/Social/F.png" height="50" width="50" /> </a>
-                            
-                            <a href="https://www.instagram.com/"> <img src="Images/Social/T.png" height="50" width="50" /> </a>
-                            
-                            
-							<a href="https://www.facebook.com"> <img src="Images/Social/email.png" height="50" width="50" /> </a>
+
+							<a href="https://www.facebook.com"> <img src="Images/Social/facebook.png" height="50" width="50" /> </a>
 
 
-							<a href="https://www.Twitter.com"> <img src="Images/Social/gplus.png" height="50" width="50" /></a>
+							<a href="https://www.Twitter.com"> <img src="Images/Social/twitter.png" height="50" width="50" /></a>
 
 
-							<a href="https://www.instagram.com/"> <img src="Images/Social/rss.png" height="50" width="50" /> </a>
+							<a href="https://www.instagram.com/"> <img src="Images/Social/instagram.png" height="50" width="50" /> </a>
+
 
 						</div>
 
