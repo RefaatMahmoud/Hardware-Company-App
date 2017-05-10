@@ -10,7 +10,8 @@ item.onclick = function () {
     name = item.parentElement.nextElementSibling.firstElementChild.firstElementChild.textContent;
     model = item.parentElement.nextElementSibling.firstElementChild.nextElementSibling.textContent;
     arr = [name, model];
-    console.log(arr);
+    item.appendTo('<input type="hidden" name="name" value=' + name + '/>');
+
 };
 
 
