@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 2.11.6
+-- version 3.3.9
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 03, 2017 at 03:07 AM
--- Server version: 5.0.51
--- PHP Version: 5.2.6
+-- Generation Time: May 10, 2017 at 10:39 PM
+-- Server version: 5.5.8
+-- PHP Version: 5.3.5
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -25,14 +25,14 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Table structure for table `adminusers`
 --
 
-CREATE TABLE `adminusers` (
-  `UserID` int(11) NOT NULL auto_increment,
-  `Username` varchar(255) character set utf8 NOT NULL,
-  `Password` varchar(255) character set utf8 NOT NULL,
-  `Email` varchar(255) character set utf8 NOT NULL,
-  `FullName` varchar(255) character set utf8 NOT NULL,
+CREATE TABLE IF NOT EXISTS `adminusers` (
+  `UserID` int(11) NOT NULL AUTO_INCREMENT,
+  `Username` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `Password` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `Email` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `FullName` varchar(255) CHARACTER SET utf8 NOT NULL,
   `Date` date NOT NULL,
-  PRIMARY KEY  (`UserID`),
+  PRIMARY KEY (`UserID`),
   UNIQUE KEY `Username` (`Username`,`Email`,`FullName`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
@@ -45,7 +45,6 @@ INSERT INTO `adminusers` (`UserID`, `Username`, `Password`, `Email`, `FullName`,
 (3, 'Abdelrahman', '273a0c7bd3c679ba9a6f5d99078e36e85d02b952', 'Abosi@gmail.com', 'Abdelrahman Mohamed', '2017-03-07'),
 (4, 'Ahmed', '77bce9fb18f977ea576bbcd143b2b521073f0cd6', 'Dias@gmail.com', 'Ahmed Eldiasy', '2017-03-07'),
 (6, 'Hussien', 'b7c40b9c66bc88d38a59e554c639d743e77f1b65', 'Hussien12@yahoo.com', 'Hussien Asous', '2017-03-07'),
-(14, 'refo', '92b8ecb910f49f28ecc47738bac7224a92ace9dd', 'hima@gmail.com', 'Abdelrahman Mohamed', '2017-03-15'),
 (15, 'shokry', 'f7c3bc1d808e04732adf679965ccc34ca7ae3441', 'shokrysuleiman032@gmail.com', 'Shokry Suleiman', '0000-00-00');
 
 -- --------------------------------------------------------
@@ -54,16 +53,16 @@ INSERT INTO `adminusers` (`UserID`, `Username`, `Password`, `Email`, `FullName`,
 -- Table structure for table `buy`
 --
 
-CREATE TABLE `buy` (
-  `id` int(10) NOT NULL auto_increment,
-  `namecard` varchar(20) character set utf8 NOT NULL,
+CREATE TABLE IF NOT EXISTS `buy` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `namecard` varchar(20) CHARACTER SET utf8 NOT NULL,
   `cardnumber` varchar(255) NOT NULL,
   `phone` int(11) NOT NULL,
-  `address` varchar(40) character set utf8 NOT NULL,
+  `address` varchar(40) CHARACTER SET utf8 NOT NULL,
   `name` varchar(20) NOT NULL,
   `price` float NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `buy`
@@ -74,7 +73,10 @@ INSERT INTO `buy` (`id`, `namecard`, `cardnumber`, `phone`, `address`, `name`, `
 (2, 'Payoneer', '9b7bd6b535813e9daf077b735dad26c09e5ff635', 1003616844, 'ajsklfjasdkljf', 'Toshiba', 7000),
 (3, 'Payoneer', 'e3bb41308208032573a0ec26389b54b10e2ac0e2', 1003616844, 'kajsdfklajsdfklj', 'Apple', 10000),
 (4, 'Payoneer', '6efff04a64b293f5156e0ce34d1c393f07f4e5b8', 1003616844, 'dkjwlsjf', 'Toshiba', 7000),
-(5, 'Payoneer', '6efff04a64b293f5156e0ce34d1c393f07f4e5b8', 1003616844, 'dkjwlsjf', 'Toshiba', 7000);
+(5, 'Payoneer', '6efff04a64b293f5156e0ce34d1c393f07f4e5b8', 1003616844, 'dkjwlsjf', 'Toshiba', 7000),
+(6, 'Payoneer', 'fc1b6c9058ad732160df6eceb14bfc02b3bc111f', 1003616844, ';asodifodsf', 'Apple', 10000),
+(7, 'Payoneer', '67d0fcaa17d1ced9dab87853448ae0f6ede8f23e', 1003616844, ';wpoierport', 'Dell', 4000),
+(8, 'Payoneer', '69040769272e7027f0c1a5cd3fbb23dc0c079872', 1003616844, '?????????', 'HP', 5000);
 
 -- --------------------------------------------------------
 
@@ -82,11 +84,11 @@ INSERT INTO `buy` (`id`, `namecard`, `cardnumber`, `phone`, `address`, `name`, `
 -- Table structure for table `categories`
 --
 
-CREATE TABLE `categories` (
-  `ID` int(11) NOT NULL auto_increment,
-  `Name` varchar(255) character set utf8 NOT NULL,
-  `Description` text character set utf8 NOT NULL,
-  PRIMARY KEY  (`ID`)
+CREATE TABLE IF NOT EXISTS `categories` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `Description` text CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
@@ -105,12 +107,12 @@ INSERT INTO `categories` (`ID`, `Name`, `Description`) VALUES
 -- Table structure for table `contacts`
 --
 
-CREATE TABLE `contacts` (
-  `id` int(11) NOT NULL auto_increment,
+CREATE TABLE IF NOT EXISTS `contacts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `message` text NOT NULL,
-  PRIMARY KEY  (`id`),
+  PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
@@ -132,32 +134,33 @@ INSERT INTO `contacts` (`id`, `name`, `email`, `message`) VALUES
 -- Table structure for table `items`
 --
 
-CREATE TABLE `items` (
-  `ItemID` int(11) NOT NULL auto_increment,
-  `image` varchar(255) character set utf8 NOT NULL,
-  `Name` varchar(255) character set utf8 NOT NULL,
-  `Description` text character set utf8 NOT NULL,
-  `Price` varchar(255) character set utf8 NOT NULL,
+CREATE TABLE IF NOT EXISTS `items` (
+  `ItemID` int(11) NOT NULL AUTO_INCREMENT,
+  `image` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `Name` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `Description` text CHARACTER SET utf8 NOT NULL,
+  `Price` varchar(255) CHARACTER SET utf8 NOT NULL,
   `Add_Date` date NOT NULL,
-  `Country_Made` varchar(255) character set utf8 NOT NULL,
-  `Status` varchar(255) character set utf8 NOT NULL,
+  `Country_Made` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `Status` varchar(255) CHARACTER SET utf8 NOT NULL,
   `Cat_ID` int(11) NOT NULL,
   `Member_ID` int(11) NOT NULL,
-  PRIMARY KEY  (`ItemID`),
+  PRIMARY KEY (`ItemID`),
   KEY `con3` (`Member_ID`),
   KEY `const1` (`Cat_ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `items`
 --
 
 INSERT INTO `items` (`ItemID`, `image`, `Name`, `Description`, `Price`, `Add_Date`, `Country_Made`, `Status`, `Cat_ID`, `Member_ID`) VALUES
-(4, '5514526_lab4.JPG', 'Dell', 'Laptop;Ram:8GB;HD:1Tera', '4000', '2017-04-24', 'china', '2', 5, 1),
-(5, '17871093_lab5.png', 'Hp', 'Laptop;Ram:8GB;HDD:1Tera;Navidia:2GB;Core i5', '5000', '2017-04-24', 'china', '2', 5, 4),
-(12, '80264283_lab4.png', 'Dell', 'Laptop;Ram:6GB;HD:1Tera;Cori3', '4000', '2017-04-24', 'china', '1', 5, 1),
-(13, '3790283_lab5.jpeg', 'HP', 'Laptop;Ram:6GB;HD:1Tera;Cori5', '5000', '2017-04-24', 'china', '1', 5, 1),
-(14, '3668212_lab6.png', 'Apple', 'Laptop;Ram:8GB;HD:1.5Tera;Cori5', '10000', '2017-04-24', 'china', '2', 5, 1);
+(1, '55493164_lab4.png', 'DELL', '???????????????', '9000', '2017-05-10', 'china', '1', 5, 1),
+(2, '19375610_lab5.jpeg', 'HP', '???????????????', '8000', '2017-05-10', 'germany', '2', 5, 4),
+(3, '73928833_lab3.png', 'Apple', '???????????????', '9000', '2017-05-10', 'china', '1', 5, 1),
+(4, '41802978_lab8.jpg', 'ACER', '???????????????', '8999', '2017-05-10', 'china', '2', 5, 3),
+(5, '87704468_lab3.png', 'Apple', '???????????????', '12000', '2017-05-10', 'china', '2', 5, 1),
+(6, '6854248_lab6.jpg', 'Apple', '???????????????', '9000', '2017-05-10', 'china', '2', 5, 1);
 
 -- --------------------------------------------------------
 
@@ -165,26 +168,33 @@ INSERT INTO `items` (`ItemID`, `image`, `Name`, `Description`, `Price`, `Add_Dat
 -- Table structure for table `uploaditems`
 --
 
-CREATE TABLE `uploaditems` (
-  `ID` int(11) NOT NULL auto_increment,
-  `Name` varchar(255) character set utf8 NOT NULL,
-  `Model` varchar(255) character set utf8 NOT NULL,
-  `Price` varchar(255) collate utf8_czech_ci NOT NULL,
-  `image` varchar(255) character set utf8 NOT NULL,
-  `status` varchar(255) collate utf8_czech_ci NOT NULL,
-  PRIMARY KEY  (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci AUTO_INCREMENT=25 ;
+CREATE TABLE IF NOT EXISTS `uploaditems` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `Model` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `Price` varchar(255) COLLATE utf8_czech_ci NOT NULL,
+  `image` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `status` varchar(255) COLLATE utf8_czech_ci NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `uploaditems`
 --
 
 INSERT INTO `uploaditems` (`ID`, `Name`, `Model`, `Price`, `image`, `status`) VALUES
-(12, 'Dell', 'Laptop;Ram:8GB;HD:1Tera	', '4000', '47753906_lab4.JPG', '1'),
-(13, 'Hp', 'Laptop;Ram:8GB;HD:1Tera;Navidia:2GB;Core i5	', '5000', '72711182_lab5.png', '1'),
-(21, 'Dell', 'Laptop;Ram:6GB;HDD:1Tera;Core i3	', '4000', '27581787_lab4.JPG', '3'),
-(22, 'HP', 'Laptop;Ram:6GB;HDD:1Tera;Core i5	', '5000', '44036865_lab5.jpeg', '3'),
-(23, 'Apple', 'Laptop;Ram:8GB;HDD:1.5Tera;Core i5	', '10000', '97213746_lab6.jpg', '3');
+(1, 'DELL', 'Latitude E610', '5000', '50772095_lab4.png', '1'),
+(2, 'Apple', 'Latter 321', '9000', '86254883_lab3.png', '1'),
+(3, 'ACER', 'Lattiude 5ss', '6000', '16519165_lab8.jpg', '1'),
+(4, 'Apple', 'PhiPhon', '12000', '76956177_lab6.jpg', '2'),
+(5, 'TOHIBA', 'Latitude 44', '8000', '92950440_lab7.jpg', '2'),
+(6, 'Sony', 'Latitude E610', '7000', '89019776_lab9.png', '1'),
+(7, 'DELL', 'Latitude E555', '4500', '86834717_lab10.jpg', '2'),
+(8, 'DELL', 'Latitude E610', '8999', '40316772_lab4.png', '2'),
+(9, 'Sony', 'PhiPhon 5s', '5500', '62780762_lab9.png', '3'),
+(10, 'HP', 'probook 450 g1', '9500', '77514649_lab11.jpg', '3'),
+(11, 'LENOVO', 'Latitude E610', '7000', '87026978_lab11.png', '3'),
+(12, 'DELL', 'Latitude E610', '6899', '3646850_lab4.png', '3');
 
 -- --------------------------------------------------------
 
@@ -192,14 +202,14 @@ INSERT INTO `uploaditems` (`ID`, `Name`, `Model`, `Price`, `image`, `status`) VA
 -- Table structure for table `useraccount`
 --
 
-CREATE TABLE `useraccount` (
-  `id` int(11) NOT NULL auto_increment,
-  `name` varchar(25) character set utf8 NOT NULL,
-  `password` varchar(50) character set utf8 NOT NULL,
-  `email` varchar(50) character set utf8 NOT NULL,
+CREATE TABLE IF NOT EXISTS `useraccount` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(25) CHARACTER SET utf8 NOT NULL,
+  `password` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8 NOT NULL,
   `phone` int(11) NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `useraccount`
