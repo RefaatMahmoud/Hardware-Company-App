@@ -218,14 +218,34 @@ session_start();
         header('Location:login_signup.php');
     }
           else{
+   $formErrors = array();
     $namecard       = $_POST['namecard'];
-    $cardNo     = $_POST['cardNo'];
-    $phone        = $_POST['phone'];
-    $address      = $_POST['address'];
+    for($i=0;$i<strlen($_POST['cardno']);$i++){
+        if(isset($_POST['cardno'])){
+            $cardNo     = $_POST['cardNo'];
+            if(is_numeric($cardNo)==false){
+                $formErrors[]= "Card Number must be Numeric!";
+            }
+        }
+    }
+    for($i=0;$i<strlen($_POST['phone']);$i++){
+        if(isset($_POST['phone'])){
+            $phone     = $_POST['phone'];
+            if(is_numeric($phone)==false){
+                $formErrors[]= "Phone must be Numeric!";
+            }
+        }
+    }
+    if(isset($_POST['address'])){
+        $address     = $_POST['address'];
+        if(is_numeric($address)){
+            $formErrors[]= "Address can't be Numeric!";
+        }
+    }
     $name       = $_POST['name'];
     $price       = $_POST['price']; 
     $hashCardNo = sha1($cardNo);
-    
+    if(empty($formErrors)){   
     $stmt = $con->prepare("INSERT INTO buy (namecard ,cardnumber ,phone ,address ,name,price)
                            VALUES (?,?,?,?,?,?)");
     $stmt->execute(array($namecard,$hashCardNo,$phone,$address,$name,$price));
@@ -233,6 +253,14 @@ session_start();
     $stmt->execute(array($name,$price));
     $stmt = $con->prepare('DELETE FROM uploaditems WHERE name = ? AND price =? LIMIT 1');
     $stmt->execute(array($name,$price));
+    header('Location:products.php');
+    }else{
+                echo "<div class='container'>";
+                echo "<div class='alert alert-danger text-center'>" . '<h3>You can not Buy by these Data<br> please Enter correct Data </h3></div>';
+                echo "</div>";
+            }
+     }
+    }
 }
       }
                         
@@ -255,7 +283,7 @@ session_start();
                 echo '</div>';
                 echo '<h4><a>';
                 echo '<img src="images/images/cart-2.png" alt="" class="cart-img"></a>';
-                echo '<span class="item_price">'.$row['Price'].'</span></h4>';
+                echo '<span class="item_price">'.$row['Price'].'</span></h4>"';
                 echo  "</div>";
                 echo "</div>";
                 echo "</div>";                    
@@ -343,7 +371,6 @@ else{
 				<!--/.modal-content-->
 			</div><!--/.modal-->
 
-
         <!--===========================footer start=================================-->
  		<div id="footer">
 			<div class="wrap">
@@ -406,19 +433,14 @@ else{
 					</div>
 					<div class="row">
 						<div class="foot">
-                            
-                            <a href="https://www.instagram.com/"> <img src="Images/Social/F.png" height="50" width="50" /> </a>
-                            
-                            <a href="https://www.instagram.com/"> <img src="Images/Social/T.png" height="50" width="50" /> </a>
-                            
-                            
-							<a href="https://www.facebook.com"> <img src="Images/Social/email.png" height="50" width="50" /> </a>
+
+							<a href="https://www.facebook.com"> <img src="Images/Social/facebook.png" height="50" width="50" /> </a>
 
 
-							<a href="https://www.Twitter.com"> <img src="Images/Social/gplus.png" height="50" width="50" /></a>
+							<a href="https://www.Twitter.com"> <img src="Images/Social/twitter.png" height="50" width="50" /></a>
 
 
-							<a href="https://www.instagram.com/"> <img src="Images/Social/rss.png" height="50" width="50" /> </a>
+							<a href="https://www.instagram.com/"> <img src="Images/Social/instagram.png" height="50" width="50" /> </a>
 
 
 						</div>

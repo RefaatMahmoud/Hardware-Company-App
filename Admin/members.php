@@ -194,34 +194,21 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     //Validation in my form
     $formError = array();
     echo "<div class='container'>";
-    if(is_numeric($user))
-    {
-        $formError[] = "user name can't be a start with number";
-    }
-    if(empty($user))
-    {
-        $formError[] = "You can't make username is <strong> Empty </strong>";
-    }
-    if(empty($email))
-    {
-        $formError[] = "You can't make email is <strong> Empty </strong>";
-    }
-    if(empty($fullname))
-    {
-        $formError[] = "You can't make fullname is <strong> Empty </strong>";
-    }
-    if(empty($pass))
-    {
-        $formError[] = "You can't make password is <strong> Empty </strong>";
-    }
-    if(strlen($pass) < 6 )
-    {
-        $formError[] = "Your password is week";
-    }
+    echo "<div class='row text-center'>";
+     if(is_numeric($user) || is_numeric($user[0]))
+       {
+           $formError [] = "username can't start with number ";
+       }
+    if(strlen($pass)<5)
+     {
+         $formError [] = 'password is week should be larger than 5 characters';
+     }
     foreach($formError as $error)
     {
-        echo "<div class='alert alert-danger'>" . $error . " </div>";
+        echo "<div class='col-lg-offset-3 col-lg-6'>";
+        echo "<div class='alert alert-danger'>" . $error . " </div></div>";
     }
+    echo "</div>";
     echo "</div>";
     //Get Data By prepare statment
     if(empty($formError))
@@ -234,15 +221,12 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     if($count>0)
     {
     echo "<div class='container'>";
-    echo "<div class='alert alert-success text-center'>" .'<h3> Update'. $count .' Record </h3></div>';
+    echo "<div class='alert alert-success text-center'>" .'<h3>1 Record inserted </h3></div>';
     echo "</div>";
-    header("REFRESH:3 ; URL=members.php?do=edit&userid=$id");
     }
            else
             {
-                echo "<div class='container'>";
-                echo "<div class='alert alert-warning text-center'>" .'<h3>You Not Change It</h3></div>';
-                echo "</div>";
+                echo "";
             }   
     }    
 }
@@ -270,34 +254,22 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     //Validation in my form
     $formError = array();
     echo "<div class='container'>";
-    if(is_numeric($user))
+    echo "<div class='row text-center'>";
+    if(is_numeric($user) || is_numeric($user[0]))
+       {
+           $formError [] = "username can't start with number ";
+       }
+    if(strlen($pass)<5)
+     {
+         $formError [] = 'password is week should be larger than 5 characters';
+     }
+    
+    foreach($formError as $error)
     {
-        $formError[0] = "username can't be a start with number";
+        echo "<div class='col-lg-offset-3 col-lg-6'>";
+        echo "<div class='alert alert-danger'>" . $error . " </div></div>";
     }
-    if(is_numeric($fullname))
-    {
-        $formError[1] = "Fullname can't be a start with number";
-    }
-    if(empty($user))
-    {
-        $formError[2] = "You can't make username is <strong> Empty </strong>";
-    }
-    if(empty($email))
-    {
-        $formError[3] = "You can't make email is <strong> Empty </strong>";
-    }
-    if(empty($fullname))
-    {
-        $formError[4] = "You can't make fullname is <strong> Empty </strong>";
-    }
-    if(empty($pass))
-    {
-        $formError[5] = "You can't make password is <strong> Empty </strong>";
-    }
-    if(strlen($pass) < 6 )
-    {
-        $formError[6] = "Your password is week";
-    }
+    echo "</div>";
     echo "</div>";
     //Get Data By prepare statment
     if(empty($formError))
@@ -316,7 +288,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
         echo "<div class='container'>";
         echo "<div class='alert alert-danger text-center'>" .'<h3>this username is already exit </h3></div>';
         echo "</div>";
-        header("REFRESH:3 ; URL=members.php?do=add");   
+        header("REFRESH:30 ; URL=members.php?do=add");   
     }
      else
      {
@@ -339,77 +311,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
         header("REFRESH:3 ; URL=members.php?do=add");   
      }
     }
-           else
-            {
-               /*
-               ==========================================
-               ===============Error Validations =========
-               ==========================================
-               */
-?>
-<div class="container">
-  <h1 class="text-center">Add New Member</h1>
-  <form class="form-horizontal" role="form" action="?do=insert" method="POST">
-    <div class="form-group">
-        <input type="hidden" name="userid">
-      <label class="control-label col-sm-2 col-md-3">UserName:</label>
-      <div class="col-sm-10 col-md-6 has-error">
-        <input type="text" class="form-control" name="username"
-               placeholder=" write not start with number username" autocomplete="off" required="required">
-    <?php
-    if(isset($formError[0])) 
-        echo "<div class='error_valid alert alert-danger'>".$formError[0]."</div>"; 
-    if(isset($formError[3]))
-    {
-        echo "<div class='error_valid alert alert-danger'>".$formError[2]."</div>"; 
-    }   
-    ?> 
-    </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2 col-md-3" for="pwd">Password:</label>
-      <div class="col-sm-10 col-md-6 has-error">
-        <input type="password" class="password form-control" name="password" placeholder="write strong password here" autocomplete="new-password" required="required">
-        <i class="show-pass fa fa-eye fa-2x"></i>
-    <?php
-    if(isset($formError[5])) 
-        echo "<div class='error_valid alert alert-danger'>".$formError[5]."</div>";
-    if(isset($formError[6])) 
-        echo "<div class='error_valid alert alert-danger'>".$formError[6]."</div>"; 
-    ?>
-      </div>
-    </div>
-      <div class="form-group">
-      <label class="control-label col-sm-2 col-md-3" for="email">Email:</label>
-      <div class="col-sm-10 col-md-6">
-        <input type="email" class="form-control" name="email" placeholder="Your email" required="required">
-      </div>
-    </div>
-      <div class="form-group">
-      <label class="control-label col-sm-2 col-md-3" for="pwd">FullName:</label>
-      <div class="col-sm-10 col-md-6 has-error">
-        <input type="text" class="form-control" name="fullname" placeholder="write your fullname" required="required">
-    
-    <?php
-        if(isset($formError[1])) 
-        echo "<div class='error_valid alert alert-danger'>".$formError[1]."</div>";
-    ?>
-    
-      </div>
-      </div>
-    <div class="form-group">        
-      <div class="col-sm-offset-2 col-sm-10 col-md-8">
-        <button type="submit" class="btn btn-primary" id="myBtn">save</button>
-      </div>
-    </div>
-  </form>
-</div>   
-                <?php
-//                foreach($formError as $error)
-//                {
-//                echo "<div class='alert alert-danger'>" . $error . " </div>";
-//                }
-            }   
     }
       else
     {
@@ -449,7 +350,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     else
     {
         $x = "This account is not Exit";
-        RedirectFunc($x,3);
+        RedirectFunc($x,5);
     }
 }
 }

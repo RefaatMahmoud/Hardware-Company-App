@@ -3,7 +3,6 @@ body {
   color: #5a5a5a; /*Font color gray*/
   font-family :Baskerville Old Face; /*showcard gothic regular;*/
   font-size:20px;
-
 background-color:#d9c3c3;
 }
 
@@ -14,6 +13,7 @@ background-color:#d9c3c3;
 	padding-top:44px;
 	margin-bottom: 0px;
 	color:lightgray;
+        margin-top: -124px;
 	/*line-height:16px;*/
 }
 

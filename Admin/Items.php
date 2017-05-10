@@ -30,7 +30,7 @@ $title = 'Items';
             <div class="table-responsive">
                 <table class="main-table text-center table table-bordered">
                     <tr>
-                        <th>#ID</th>
+                        <th>photo</th>
                         <th>Name</th>
                         <th>Description</th>
                         <th>Price</th>
@@ -44,7 +44,15 @@ $title = 'Items';
                     foreach($rows as $row)
                     {
                         echo "<tr>";
-                        echo "<td>" .$row['ItemID']."</td>"; //$row[0]
+                        if(!empty($row['image']))
+                        {
+                            echo "<td>";
+                            echo "<img class='imageItem' src='Layout/Images/".$row['image']."' alt='pic'></td>";
+                        }
+                        else
+                        {
+                            echo "<td>No Image</td>";   
+                        }
                         echo "<td>" .$row['Name']."</td>";
                         echo "<td>" .$row['Description']."</td>";
                         echo "<td>" .$row['Price']."</td>";
@@ -77,7 +85,7 @@ $title = 'Items';
                     ?>
 <div class="container">
   <h1 class="text-center">Add New Item</h1>
-  <form class="form-horizontal" role="form" action="Items.php?do=insert" method="POST">
+  <form class="form-horizontal" role="form" action="Items.php?do=insert" method="POST" enctype="multipart/form-data">
              <!--Start Name of Item -->
     <div class="form-group">
         <input type="hidden" name="itemid">
@@ -131,11 +139,20 @@ $title = 'Items';
     </div>
             <!--End Country_made of Item -->
       
+       <!--Start Photo of Item -->
+            <div class="form-group">
+                <label class="control-label col-sm-2 col-md-3">Photo</label>
+                <div class="col-sm-10 col-md-6">
+                    <input type="file" class="form-control" name="file" required="required">
+                </div>
+            </div>
+        <!--End photo of Item -->
+      
                       <!--Start Status of Item -->
     <div class="form-group">
     <label class="control-label col-sm-2 col-md-3">Status</label>
       <div class="col-sm-10 col-md-6">
-            <select class="form-control" name='status'>
+            <select class="form-control" name='status' required="required">
                 <option value="0">......</option>
                 <option value="1">used</option>
                 <option value="2">New</option>
@@ -148,7 +165,7 @@ $title = 'Items';
     <div class="form-group">
     <label class="control-label col-sm-2 col-md-3">Members</label>
       <div class="col-sm-10 col-md-6">
-            <select class="form-control" name='members'>
+            <select class="form-control" name='members' required="required">
                 <option value="0">......</option>
                 <?php
                     $stmt1 = $con->prepare("select * from adminusers");
@@ -168,7 +185,7 @@ $title = 'Items';
     <div class="form-group">
     <label class="control-label col-sm-2 col-md-3">Categories</label>
       <div class="col-sm-10 col-md-6">
-            <select class="form-control" name='categories'>
+            <select class="form-control" name='categories' required="required">
                 <option value="0">......</option>
                 <?php
                     $stmt2 = $con->prepare("select * from categories");
@@ -218,7 +235,7 @@ $title = 'Items';
 ?>      
 <div class="container">
   <h1 class="text-center">Edit Item</h1>
-  <form class="form-horizontal" role="form" action="Items.php?do=update" method="POST">
+  <form class="form-horizontal" role="form" action="Items.php?do=update" method="POST" enctype="multipart/form-data">
              <!--Start Name of Item -->
     <div class="form-group">
         <input type="hidden" name="itemid" value="<?php echo $_GET['Item_Id']?>">
@@ -271,8 +288,17 @@ $title = 'Items';
         </div>
     </div>
             <!--End Country_made of Item -->
+           
+       <!--Start Photo of Item -->
+            <div class="form-group">
+                <label class="control-label col-sm-2 col-md-3">Photo</label>
+                <div class="col-sm-10 col-md-6">
+                    <input type="file" class="form-control" name="file" required="required">
+                </div>
+            </div>
+        <!--End photo of Item -->
       
-                      <!--Start Status of Item -->
+        <!--Start Status of Item -->
     <div class="form-group">
     <label class="control-label col-sm-2 col-md-3">Status</label>
       <div class="col-sm-10 col-md-6">
@@ -361,9 +387,20 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     $members = $_POST['members'];
     $categories = $_POST['categories'];
     $Item_Id = $_POST['itemid'];
+    $avater = $_FILES['file'];
+    $avaterName = $_FILES['file']['name'];
+    $avaterType = $_FILES['file']['type'];
+    $avaterTempName = $_FILES['file']['tmp_name'];
+    $avaterSize = $_FILES['file']['size'];
+     //Avaliable Extention 
+    $allowExtensions = array('jpeg','jpg','gif','png');
+    //Now I want to get Extention of photo
+    $imageExten = strtolower(end(explode('.',$avaterName)));
+    $formError = array();
     //Validation in my form
     $formError = array();
     echo "<div class='container'>";
+    echo "<div class='row text-center'>";
     if(is_numeric($name))
     {
         $formError[] = "name can't be a start with number";
@@ -392,18 +429,33 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     {
         $formError[] = "can't make name from two characters only";
     }
-    foreach($formError as $error)
+    if(!empty($avaterName )&& !in_array($imageExten,$allowExtensions))
     {
-        echo "<div class='alert alert-danger'>" . $error . " </div>";
+        $formError[] = "This Extension for image not allow";
     }
+    if($avaterSize > 4194304)
+    {
+        //4MB*1024*1024 =  4194304 Byte
+        $formError[] = "The size is larger than 4MB";
+    }
+   foreach($formError as $error)
+    {
+        echo "<div class='col-lg-offset-3 col-lg-6'>";
+        echo "<div class='alert alert-danger'>" . $error . " </div></div>";
+    }
+    echo "</div>";
     echo "</div>";
     //Get Data By prepare statment
     if(empty($formError))
     {
-     $stmt = $con->prepare("Update items SET Name = ? , Price = ? , Description = ?,
+    //Now I want to upload photo in images folder && prevent Duplicate the same name
+    $avater = rand(0,100000000) . '_' .$avaterName ; 
+    
+    move_uploaded_file($avaterTempName ,'Layout\Images\\' . $avater);
+     $stmt = $con->prepare("Update items SET Name = ? ,image = ? , Price = ? , Description = ?,
                             Country_Made = ? , Status = ? , Cat_ID = ? , Member_ID = ? WHERE ItemID = ?");
     //excute Data
-    $stmt->execute(array($name,$price,$description,$country_made,$status,$categories,$members,$Item_Id));
+    $stmt->execute(array($name,$avater,$price,$description,$country_made,$status,$categories,$members,$Item_Id));
     //Count the number of rows
     $count = $stmt->rowCount();
     if($count>0)
@@ -437,7 +489,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
             if($_SERVER['REQUEST_METHOD'] == "POST")
             {
                                 //collect Data By Post
-    echo "<h2 class='text-center'>Insert Member</h2>";
+    echo "<h2 class='text-center'>Insert Item</h2>";
     $name = $_POST['name'];
     $description = $_POST['description'];
     $price = $_POST['price'];
@@ -445,14 +497,29 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     $status = $_POST['status'];
     $members = $_POST['members'];
     $categories = $_POST['categories'];
+    $avater = $_FILES['file'];
+    $avaterName = $_FILES['file']['name'];
+    $avaterType = $_FILES['file']['type'];
+    $avaterTempName = $_FILES['file']['tmp_name'];
+    $avaterSize = $_FILES['file']['size'];
+     //Avaliable Extention 
+    $allowExtensions = array('jpeg','jpg','gif','png');
+    //Now I want to get Extention of photo
+    $imageExten = strtolower(end(explode('.',$avaterName)));
+    
     //Validation in my form
     $formError = array();
     echo "<div class='container'>";
-    if(is_numeric($name))
-    {
-        $formError[] = "name can't be a start with number";
-    }
-    if(is_numeric($country_made))
+    echo "<div class='row text-center'>";
+     if(is_numeric($name) || is_numeric($name[0]))
+       {
+           $formError [] = "username can't start with number ";
+       }
+     if(!is_numeric($price))
+     {
+         $formError [] = "Price should Be a number";
+     }
+    if(is_numeric($country_made) || is_numeric($name[0]))
     {
         $formError[] = "country_made can't be a start with number";
     }
@@ -476,10 +543,21 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     {
         $formError[] = "can't make name from two characters only";
     }
+    if(!empty($avaterName )&& !in_array($imageExten,$allowExtensions))
+    {
+        $formError[] = "This Extension for image not allow";
+    }
+    if($avaterSize > 4194304)
+    {
+        //4MB*1024*1024 =  4194304 Byte
+        $formError[] = "The size is larger than 4MB";
+    }
     foreach($formError as $error)
     {
-        echo "<div class='alert alert-danger'>" . $error . " </div>";
+        echo "<div class='col-lg-offset-3 col-lg-6'>";
+        echo "<div class='alert alert-danger'>" . $error . " </div></div>";
     }
+    echo "</div>";
     echo "</div>";
     //Get Data By prepare statment
     if(empty($formError))
@@ -491,13 +569,18 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     //excute Data
     $stmt->execute(array($user,$email,$fullname,sha1($pass)));    
         */
-
-       $stmt = $con->prepare("Insert into items (Name,Description,Price,
-                          Country_Made ,Status ,Add_Date , Cat_ID , Member_ID) values(:zname , :zdescription ,:zprice ,:zcountry_made,:zstatus,now(),:zcat,:zmember)");  
+    //Now I want to upload photo in images folder && prevent Duplicate the same name
+    $avater = rand(0,100000000) . '_' .$avaterName ; 
+    
+    move_uploaded_file($avaterTempName ,'Layout\Images\\' . $avater);
+        
+       $stmt = $con->prepare("Insert into items (Name,image,Description,Price,
+                          Country_Made ,Status ,Add_Date , Cat_ID , Member_ID) values(:zname,:zimg , :zdescription ,:zprice ,:zcountry_made,:zstatus,now(),:zcat,:zmember)");  
     
     //excute Data
     $stmt->execute(array(
         'zname' => $name ,
+        'zimg' => $avater,
         'zdescription' => $description,
         'zprice' => $price ,
         'zcountry_made'=>$country_made,
